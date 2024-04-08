@@ -23,7 +23,7 @@ export default function NavAndHero() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <ul style={{ display: "flex", gap: "1.2rem" }}>
+            <ul style={{ display: "flex", gap: "2.2rem" }}>
               <Link style={{ textDecoration: "none" }}>
                 <li>Home</li>
               </Link>
@@ -39,10 +39,10 @@ export default function NavAndHero() {
             </ul>
             <div>
               <Link>
-                <SearchIcon />
+                <SearchIcon color="primary" />
               </Link>
               <Link>
-                <ShoppingCartIcon />
+                <ShoppingCartIcon color="primary" />
               </Link>
             </div>
           </Grid>
@@ -52,8 +52,27 @@ export default function NavAndHero() {
         <Container>
           <Grid container alignItems="center">
             <Grid xs={6}>
-              <h2>Your Products are great.</h2>
-              <Button variant="contained">Shop Product</Button>
+              <h2
+                style={{
+                  fontSize: "3.9rem",
+                  fontWeight: "300",
+                  textTransform: "uppercase",
+                }}
+              >
+                Your Products are great.
+              </h2>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  textTransform: "uppercase",
+                  borderRadius: "0",
+                  fontWeight: "200",
+                  fontSize: "1rem",
+                }}
+              >
+                Shop Product
+              </Button>
             </Grid>
             <Grid xs={6}>
               <img
