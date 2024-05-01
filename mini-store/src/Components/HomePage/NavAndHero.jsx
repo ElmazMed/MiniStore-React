@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Container from "@mui/material/Container";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,8 +7,10 @@ import "../../App.css";
 import smartwatch from "../../Images/smartwatch-hero.png";
 import { Link } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
+import { ProductsContext } from "./Products/ProductsContext";
 
 export default function NavAndHero() {
+  const { productCounter } = useContext(ProductsContext);
   return (
     <>
       <Container>
@@ -22,6 +24,7 @@ export default function NavAndHero() {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            position={"relative"}
           >
             <ul style={{ display: "flex", gap: "2.2rem" }}>
               <Link style={{ textDecoration: "none" }}>
@@ -38,7 +41,8 @@ export default function NavAndHero() {
               </Link>
             </ul>
             <div>
-              <Link>
+              <div className="counter">{productCounter}</div>
+              <Link style={{ textDecoration: "none" }}>
                 <SearchIcon color="primary" />
               </Link>
               <Link>
