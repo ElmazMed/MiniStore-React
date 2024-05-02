@@ -3,6 +3,8 @@ import NavAndHero from "./NavAndHero";
 import Products from "./Products/Products";
 import Offre from "./Offre";
 import ReviewsAndSubs from "./ReviewsAndSubs";
+import ShopInsta from "./ShopInsta";
+import Footer from "./Footer";
 
 export default function Home() {
   return (
@@ -11,6 +13,8 @@ export default function Home() {
       <Products />
       <Offre />
       <ReviewsAndSubs />
+      <ShopInsta />
+      <Footer />
     </>
   );
 }

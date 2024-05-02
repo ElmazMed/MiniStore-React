@@ -17,6 +17,7 @@ export default function MobilesCarousel() {
   const [addToCart, setAddToCart] = useState({
     visibility: "hidden",
     mb: "12%",
+    opacity: 0,
   });
 
   function SlideTransition(props) {
@@ -68,10 +69,20 @@ export default function MobilesCarousel() {
   };
 
   const handleMouseOver = () => {
-    setAddToCart({ ...addToCart, visibility: "visible", mb: "20%" });
+    setAddToCart({
+      ...addToCart,
+      visibility: "visible",
+      mb: "20%",
+      opacity: "1",
+    });
   };
   const handleMouseOut = () => {
-    setAddToCart({ ...addToCart, visibility: "hidden", mb: "12%" });
+    setAddToCart({
+      ...addToCart,
+      visibility: "hidden",
+      mb: "12%",
+      opacity: "0",
+    });
   };
   const handleAddToCart = (Transition) => () => {
     setState({
@@ -106,7 +117,7 @@ export default function MobilesCarousel() {
                   onMouseOver={handleMouseOver}
                   onMouseOut={handleMouseOut}
                 >
-                  <Grid>
+                  <Grid position={"relative"}>
                     <img src={p.image} width={"100%"} alt="" />
 
                     <Button
@@ -119,6 +130,10 @@ export default function MobilesCarousel() {
                         borderRadius: "0",
                         visibility: addToCart.visibility,
                         transition: "all .5s ease-in-out",
+                        opacity: addToCart.opacity,
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "65%",
                       }}
                       onClick={handleAddToCart(SlideTransition)}
                       endIcon={<ShoppingCartIcon />}

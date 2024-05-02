@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Input, Stack, Typography } from "@mui/material";
+import { Button, Grid, Input, Typography } from "@mui/material";
 
 export default function Subscription() {
   return (
@@ -36,7 +36,7 @@ export default function Subscription() {
               style={{
                 backgroundColor: "#ffff",
                 padding: ".5rem",
-                maxWidth: "70%",
+                width: "70%",
               }}
               required
             />
@@ -46,7 +46,7 @@ export default function Subscription() {
               color="secondary"
               style={{
                 borderRadius: "0",
-                maxWidth: "30%",
+                width: "30%",
                 color: "#ffff",
                 letterSpacing: "2px",
               }}
