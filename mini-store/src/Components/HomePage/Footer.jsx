@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <>
       <Container>
-        <Grid container my={5}>
+        <Grid container mt={6} mb={10}>
           <Grid xs={3}>
             <Typography variant="h4" fontWeight={"500"} mb={2}>
               MiniStore.

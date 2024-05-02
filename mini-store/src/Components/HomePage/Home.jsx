@@ -5,6 +5,7 @@ import Offre from "./Offre";
 import ReviewsAndSubs from "./ReviewsAndSubs";
 import ShopInsta from "./ShopInsta";
 import Footer from "./Footer";
+import SubFooter from "./SubFooter";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <ReviewsAndSubs />
       <ShopInsta />
       <Footer />
+      <SubFooter />
     </>
   );
 }
