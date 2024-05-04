@@ -20,16 +20,24 @@ li:hover{
   text-decoration: none;
   position: absolute;
   padding: 4px;
-  top: 0;
-  right: -26px;
+  top: -15px;
+  right: -25px;
   height: 24px;
   width: 24px;
 }
 .slick-next::before{
   content: "" !important;
+  right: -16px !important;
 }
 .slick-prev::before{
   content: "" !important;
+  left: -16px !important;
+}
+.slick-next{
+  right: -16px !important;
+}
+.slick-prev{
+  left: -16px !important;
 }
 .slick-list{
   text-align: center !important;
@@ -42,6 +50,9 @@ li:hover{
 }
 .quoteIcon{
   font-size: 3rem !important;
+}
+ol {
+  justify-content: center !important;
 }
 @font-face {
   font-family: jost;

@@ -1,70 +1,64 @@
-import React, { useContext } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
+import React from "react";
+import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "../../App.css";
 import smartwatch from "../../Images/smartwatch-hero.png";
-import { Link } from "react-router-dom";
-import { Button, Stack } from "@mui/material";
-import { ProductsContext } from "./Products/ProductsContext";
+import {
+  Button,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 export default function NavAndHero() {
-  const { productCounter } = useContext(ProductsContext);
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <>
-      <Container>
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid xs={6}>
-            <h2 style={{ fontWeight: "500" }}>MiniStore.</h2>
-          </Grid>
-
-          <Grid
-            xs={6}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            position={"relative"}
-          >
-            <ul style={{ display: "flex", gap: "2.2rem" }}>
-              <Link style={{ textDecoration: "none" }}>
-                <li>Home</li>
-              </Link>
-              <Link style={{ textDecoration: "none" }}>
-                <li>Electronics</li>
-              </Link>
-              <Link style={{ textDecoration: "none" }}>
-                <li>Contact</li>
-              </Link>
-              <Link style={{ textDecoration: "none" }}>
-                <li>About</li>
-              </Link>
-            </ul>
-            <div>
-              <div className="counter">{productCounter}</div>
-              <Link style={{ textDecoration: "none" }}>
-                <SearchIcon color="primary" />
-              </Link>
-              <Link>
-                <ShoppingCartIcon color="primary" />
-              </Link>
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
-      <Stack style={{ backgroundColor: "#EDF1F3", height: "30rem" }}>
+      {/* HERO SECTION */}
+      <Stack
+        style={{
+          backgroundColor: "#EDF1F3",
+          overflow: "hidden",
+        }}
+      >
         <Container>
           <Grid container alignItems="center">
-            <Grid xs={6}>
-              <h2
-                style={{
-                  fontSize: "3.9rem",
-                  fontWeight: "300",
-                  textTransform: "uppercase",
-                }}
-              >
-                Your Products are great.
-              </h2>
+            <Grid
+              xs={12}
+              item
+              md={6}
+              display={{ xs: "flex", md: "block" }}
+              flexDirection={"column"}
+              alignItems={"center"}
+            >
+              {isMd && (
+                <Typography
+                  variant="h2"
+                  lineHeight={"1.6"}
+                  fontWeight={"300"}
+                  fontSize={"3.9rem"}
+                  textTransform={"uppercase"}
+                >
+                  Your Products are great.
+                </Typography>
+              )}
+              {isSm && (
+                <Typography
+                  variant="h5"
+                  lineHeight={"1.6"}
+                  fontWeight={"300"}
+                  fontSize={"1.9rem"}
+                  textTransform={"uppercase"}
+                  textAlign={"center"}
+                >
+                  Your Products are great.
+                </Typography>
+              )}
               <Button
                 variant="contained"
                 color="primary"
@@ -78,11 +72,11 @@ export default function NavAndHero() {
                 Shop Product
               </Button>
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={12} item md={6} marginBottom={"-3.5rem"}>
               <img
                 src={smartwatch}
                 alt="Smart-Watch"
-                style={{ maxWidth: "81%" }}
+                style={{ maxWidth: "90%" }}
               />
             </Grid>
           </Grid>

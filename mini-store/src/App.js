@@ -9,7 +9,7 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
 import Home from "./Components/HomePage/Home";
-import NavAndHero from "./Components/HomePage/NavAndHero";
+import About from "./Components/About/About";
 
 import { ProductsContext } from "../src/Components/HomePage/Products/ProductsContext";
 
@@ -22,6 +22,10 @@ import watch1 from "../src/Images/watch-1.png";
 import watch2 from "../src/Images/watch-2.png";
 import watch3 from "../src/Images/watch-3.png";
 import watch4 from "../src/Images/watch-4.png";
+import Nav from "./Components/HomePage/Nav";
+import SubFooter from "./Components/HomePage/SubFooter";
+import Footer from "./Components/HomePage/Footer";
+import Contact from "./Components/Contact/Contact";
 
 const theme = createTheme({
   palette: {
@@ -112,12 +116,17 @@ function App() {
             setProductCounter,
           }}
         >
-          <Home />
+          <Nav />
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+          <Footer />
+          <SubFooter />
         </ProductsContext.Provider>
       </ThemeProvider>
-      <Routes>
-        <Route path="/Home" element={<NavAndHero />} />
-      </Routes>
     </>
   );
 }

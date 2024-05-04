@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../App.css";
 
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 import StarRateIcon from "@mui/icons-material/StarRate";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
@@ -51,6 +51,10 @@ export default function ReviewsAndSubs() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Container>
@@ -60,11 +64,25 @@ export default function ReviewsAndSubs() {
               <div style={{ opacity: ".2", height: "2rem" }}>
                 <FormatQuoteIcon className="quoteIcon" />
               </div>
-              <Typography variant="h6" gutterBottom width={"50%"}>
-                “Tempus oncu enim pellen tesque este pretium in neque, elit
-                morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
-                vel morbi suspen dise sagittis lorem habi tasse morbi.”
-              </Typography>
+              {isMd && (
+                <Typography variant="h6" gutterBottom width={"50%"}>
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
+              {isSm && (
+                <Typography
+                  variant="h6"
+                  fontSize={"1rem"}
+                  gutterBottom
+                  width={"100%"}
+                >
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
               <div style={{ display: "flex", gap: "1rem", color: "#72AEC8" }}>
                 <StarRateIcon />
                 <StarRateIcon />
@@ -80,11 +98,25 @@ export default function ReviewsAndSubs() {
               <div style={{ opacity: ".2", height: "2rem" }}>
                 <FormatQuoteIcon className="quoteIcon" />
               </div>
-              <Typography variant="h6" gutterBottom width={"50%"}>
-                “Tempus oncu enim pellen tesque este pretium in neque, elit
-                morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
-                vel morbi suspen dise sagittis lorem habi tasse morbi.”
-              </Typography>
+              {isMd && (
+                <Typography variant="h6" gutterBottom width={"50%"}>
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
+              {isSm && (
+                <Typography
+                  variant="h6"
+                  fontSize={"1rem"}
+                  gutterBottom
+                  width={"100%"}
+                >
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
               <div style={{ display: "flex", gap: "1rem", color: "#72AEC8" }}>
                 <StarRateIcon />
                 <StarRateIcon />
@@ -100,11 +132,25 @@ export default function ReviewsAndSubs() {
               <div style={{ opacity: ".2", height: "2rem" }}>
                 <FormatQuoteIcon className="quoteIcon" />
               </div>
-              <Typography variant="h6" gutterBottom width={"50%"}>
-                “Tempus oncu enim pellen tesque este pretium in neque, elit
-                morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
-                vel morbi suspen dise sagittis lorem habi tasse morbi.”
-              </Typography>
+              {isMd && (
+                <Typography variant="h6" gutterBottom width={"50%"}>
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
+              {isSm && (
+                <Typography
+                  variant="h6"
+                  fontSize={"1rem"}
+                  gutterBottom
+                  width={"100%"}
+                >
+                  “Tempus oncu enim pellen tesque este pretium in neque, elit
+                  morbi sagittis lorem habi mattis Pellen tesque pretium feugiat
+                  vel morbi suspen dise sagittis lorem habi tasse morbi.”
+                </Typography>
+              )}
               <div style={{ display: "flex", gap: "1rem", color: "#72AEC8" }}>
                 <StarRateIcon />
                 <StarRateIcon />

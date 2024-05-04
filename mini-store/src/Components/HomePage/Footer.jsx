@@ -1,7 +1,14 @@
 import React from "react";
 import "../../App.css";
 
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
@@ -9,14 +16,25 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Container>
         <Grid container mt={6} mb={10}>
-          <Grid xs={3}>
-            <Typography variant="h4" fontWeight={"500"} mb={2}>
-              MiniStore.
-            </Typography>
+          <Grid xs={6} md={3} mb={4}>
+            {isMd && (
+              <Typography variant="h4" fontWeight={"500"} mb={2}>
+                MiniStore.
+              </Typography>
+            )}
+            {isSm && (
+              <Typography variant="h5" fontWeight={"500"} mb={2}>
+                MiniStore.
+              </Typography>
+            )}
             <Typography variant="subtitle2" fontWeight={"300"} mb={2}>
               Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit.
               Gravida massa volutpat aenean odio erat nullam fringilla.
@@ -44,7 +62,7 @@ export default function Footer() {
               </a>
             </Stack>
           </Grid>
-          <Grid xs={3}>
+          <Grid xs={6} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}
@@ -77,7 +95,7 @@ export default function Footer() {
               </Link>
             </ul>
           </Grid>
-          <Grid xs={3}>
+          <Grid xs={6} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}
@@ -97,20 +115,20 @@ export default function Footer() {
               }}
             >
               <Link style={{ textDecoration: "none" }}>
-                <li>Track your order</li>
+                <li style={{ fontSize: ".9rem" }}>Track your order</li>
               </Link>
               <Link style={{ textDecoration: "none" }}>
-                <li>Returns policies</li>
+                <li style={{ fontSize: ".9rem" }}>Returns policies</li>
               </Link>
               <Link style={{ textDecoration: "none" }}>
-                <li>Shipping policies</li>
+                <li style={{ fontSize: ".9rem" }}>Shipping policies</li>
               </Link>
               <Link style={{ textDecoration: "none" }}>
-                <li>FAQs</li>
+                <li style={{ fontSize: ".9rem" }}>FAQs</li>
               </Link>
             </ul>
           </Grid>
-          <Grid xs={3}>
+          <Grid xs={6} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}

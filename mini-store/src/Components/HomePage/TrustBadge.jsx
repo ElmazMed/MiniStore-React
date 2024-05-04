@@ -10,7 +10,14 @@ export default function TrustBadge() {
     <>
       <Container>
         <Grid container my={10}>
-          <Grid xs={6} md={3}>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            display={{ xs: "flex" }}
+            flexDirection={"column"}
+            alignItems={{ xs: "center", sm: "baseline" }}
+          >
             <Box display="flex" alignItems="center" gap={1}>
               <LocalShippingOutlinedIcon color="secondary" />
               <Typography
@@ -26,12 +33,19 @@ export default function TrustBadge() {
               fontWeight={300}
               gutterBottom
               color="gray"
-              mr={13}
+              mr={{ sm: 13 }}
+              mb={{ xs: 2 }}
             >
               Consectetur adipi elit lorem ipsum dolor sit amet.
             </Typography>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid
+            xs={12}
+            sm={3}
+            display={{ xs: "flex" }}
+            flexDirection={"column"}
+            alignItems={{ xs: "center", sm: "baseline" }}
+          >
             <Box display="flex" alignItems="center" gap={1}>
               <VerifiedOutlinedIcon color="secondary" />
               <Typography
@@ -47,12 +61,19 @@ export default function TrustBadge() {
               fontWeight={300}
               gutterBottom
               color="gray"
-              mr={13}
+              mr={{ sm: 13 }}
+              mb={{ xs: 2 }}
             >
               Dolor sit amet orem ipsu mcons ectetur adipi elit.
             </Typography>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid
+            xs={12}
+            sm={3}
+            display={{ xs: "flex" }}
+            flexDirection={"column"}
+            alignItems={{ xs: "center", sm: "baseline" }}
+          >
             <Box display="flex" alignItems="center" gap={1}>
               <LoyaltyOutlinedIcon color="secondary" />
               <Typography
@@ -68,14 +89,22 @@ export default function TrustBadge() {
               fontWeight={300}
               gutterBottom
               color="gray"
-              mr={13}
+              mr={{ sm: 13 }}
+              mb={{ xs: 2 }}
             >
-              Amet consectetur adipi elit loreme ipsum dolor sit.
+              Amet consectetur adipi elit loreme ipsum dolor.
             </Typography>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid
+            xs={12}
+            sm={3}
+            display={{ xs: "flex" }}
+            flexDirection={"column"}
+            alignItems={{ xs: "center", sm: "baseline" }}
+          >
             <Box display="flex" alignItems="center" gap={1}>
               <GppGoodOutlinedIcon color="secondary" />
+
               <Typography
                 textTransform={"uppercase"}
                 variant="subtitle1"
@@ -89,7 +118,8 @@ export default function TrustBadge() {
               fontWeight={300}
               gutterBottom
               color="gray"
-              mr={13}
+              mr={{ sm: 13 }}
+              mb={{ xs: 2 }}
             >
               Rem Lopsum dolor sit amet, consectetur adipi elit.
             </Typography>
