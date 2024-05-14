@@ -12,7 +12,7 @@ import Fade from "@mui/material/Fade";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function WatchesCarousel() {
-  const { watchesProduct, setProductCounter, productCounter } =
+  const { products, setProductCounter, productCounter } =
     useContext(ProductsContext);
   const [addToCart, setAddToCart] = useState({
     visibility: "hidden",
@@ -105,7 +105,7 @@ export default function WatchesCarousel() {
 
       <div className="slider-container">
         <Slider {...settings}>
-          {watchesProduct.map((p) => {
+          {products[0].watches.map((p) => {
             return (
               <Box key={p.id}>
                 <Grid

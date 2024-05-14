@@ -26,6 +26,7 @@ import Nav from "./Components/HomePage/Nav";
 import SubFooter from "./Components/HomePage/SubFooter";
 import Footer from "./Components/HomePage/Footer";
 import Contact from "./Components/Contact/Contact";
+import Electronic from "./Components/Electronics/Electronic";
 
 const theme = createTheme({
   palette: {
@@ -37,71 +38,76 @@ const theme = createTheme({
   },
 });
 
-const mobileProduct = [
+const products = [
   {
-    id: uuidv4(),
-    name: "Iphone 10",
-    price: 980,
-    image: iphone10,
-  },
-  {
-    id: uuidv4(),
-    name: "Iphone 11",
-    price: 1100,
-    image: iphone11,
-  },
-  {
-    id: uuidv4(),
-    name: "Iphone 8",
-    price: 780,
-    image: iphone8,
-  },
-  {
-    id: uuidv4(),
-    name: "Iphone 13",
-    price: 1500,
-    image: iphone13,
-  },
-  {
-    id: uuidv4(),
-    name: "Iphone 13",
-    price: 1500,
-    image: iphone13,
+    phones: [
+      {
+        id: uuidv4(),
+        name: "Iphone 10",
+        price: 980,
+        image: iphone10,
+      },
+      {
+        id: uuidv4(),
+        name: "Iphone 11",
+        price: 1100,
+        image: iphone11,
+      },
+      {
+        id: uuidv4(),
+        name: "Iphone 8",
+        price: 780,
+        image: iphone8,
+      },
+      {
+        id: uuidv4(),
+        name: "Iphone 13",
+        price: 1500,
+        image: iphone13,
+      },
+      {
+        id: uuidv4(),
+        name: "Iphone 13",
+        price: 1500,
+        image: iphone13,
+      },
+    ],
+    watches: [
+      {
+        id: uuidv4(),
+        name: " Pink watch",
+        price: 870,
+        image: watch1,
+      },
+      {
+        id: uuidv4(),
+        name: "Heavy watch",
+        price: 680,
+        image: watch2,
+      },
+      {
+        id: uuidv4(),
+        name: "Spotted watch",
+        price: 750,
+        image: watch3,
+      },
+      {
+        id: uuidv4(),
+        name: "Black watch",
+        price: 650,
+        image: watch4,
+      },
+      {
+        id: uuidv4(),
+        name: "Heavy watch",
+        price: 680,
+        image: watch2,
+      },
+    ],
   },
 ];
 
-const watchesProduct = [
-  {
-    id: uuidv4(),
-    name: " Pink watch",
-    price: 870,
-    image: watch1,
-  },
-  {
-    id: uuidv4(),
-    name: "Heavy watch",
-    price: 680,
-    image: watch2,
-  },
-  {
-    id: uuidv4(),
-    name: "Spotted watch",
-    price: 750,
-    image: watch3,
-  },
-  {
-    id: uuidv4(),
-    name: "Black watch",
-    price: 650,
-    image: watch4,
-  },
-  {
-    id: uuidv4(),
-    name: "Heavy watch",
-    price: 680,
-    image: watch2,
-  },
-];
+console.log("the array is ", [...Array()]);
 
 function App() {
   const [productCounter, setProductCounter] = useState(0);
@@ -110,8 +116,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <ProductsContext.Provider
           value={{
-            mobileProduct,
-            watchesProduct,
+            products,
             productCounter,
             setProductCounter,
           }}
@@ -120,6 +125,7 @@ function App() {
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/electronics" element={<Electronic />} />
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
           </Routes>

@@ -12,7 +12,7 @@ import Fade from "@mui/material/Fade";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function MobilesCarousel() {
-  const { mobileProduct, setProductCounter, productCounter } =
+  const { products, setProductCounter, productCounter } =
     useContext(ProductsContext);
   const [addToCart, setAddToCart] = useState({
     visibility: "hidden",
@@ -105,7 +105,7 @@ export default function MobilesCarousel() {
 
       <div className="slider-container">
         <Slider {...settings}>
-          {mobileProduct.map((p) => {
+          {products[0].phones.map((p) => {
             return (
               <Box key={p.id}>
                 <Grid
