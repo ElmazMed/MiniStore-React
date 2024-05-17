@@ -61,7 +61,7 @@ export default function Nav() {
               </ul>
               <div style={{ position: "relative" }}>
                 <div className="counter">{productCounter}</div>
-                <Link>
+                <Link to="/cart">
                   <ShoppingCartIcon color="primary" />
                 </Link>
               </div>

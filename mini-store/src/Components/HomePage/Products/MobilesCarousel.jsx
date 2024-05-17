@@ -14,15 +14,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export default function MobilesCarousel() {
   const { products, setProductCounter, productCounter } =
     useContext(ProductsContext);
-  const [addToCart, setAddToCart] = useState({
-    visibility: "hidden",
-    mb: "12%",
-    opacity: 0,
-  });
+
+  const phonesProducts = products.filter((p) => p.category === "phones");
 
   function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
   }
+
+  // SNACKBAR //
   const handleClose = () => {
     setState({
       ...state,
@@ -33,6 +32,9 @@ export default function MobilesCarousel() {
     open: false,
     Transition: Fade,
   });
+  //===== SNACKBAR =====//
+
+  // CAROUSEL SETTINGS //
   const settings = {
     dots: true,
     infinite: false,
@@ -67,22 +69,15 @@ export default function MobilesCarousel() {
       },
     ],
   };
+  // ==== CAROUSEL SETTINS ===== //
 
-  const handleMouseOver = () => {
-    setAddToCart({
-      ...addToCart,
-      visibility: "visible",
-      mb: "20%",
-      opacity: "1",
-    });
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+
+  const handleMouseOver = (id) => {
+    setHoveredProduct(id);
   };
   const handleMouseOut = () => {
-    setAddToCart({
-      ...addToCart,
-      visibility: "hidden",
-      mb: "12%",
-      opacity: "0",
-    });
+    setHoveredProduct(null);
   };
   const handleAddToCart = (Transition) => () => {
     setState({
@@ -105,7 +100,7 @@ export default function MobilesCarousel() {
 
       <div className="slider-container">
         <Slider {...settings}>
-          {products[0].phones.map((p) => {
+          {phonesProducts.map((p) => {
             return (
               <Box key={p.id}>
                 <Grid
@@ -114,23 +109,24 @@ export default function MobilesCarousel() {
                   flexDirection={"column"}
                   gap={2}
                   width={"90%"}
-                  onMouseOver={handleMouseOver}
+                  onMouseOver={() => handleMouseOver(p.id)}
                   onMouseOut={handleMouseOut}
                 >
-                  <Grid position={"relative"}>
+                  <Grid item={true} position={"relative"}>
                     <img src={p.image} width={"100%"} alt="" />
 
                     <Button
                       variant="contained"
                       style={{
                         position: "absolute",
-                        bottom: addToCart.mb,
+                        bottom: hoveredProduct === p.id ? "20%" : "12%",
                         marginInline: "3.3%",
                         letterSpacing: "2px",
                         borderRadius: "0",
-                        visibility: addToCart.visibility,
+                        visibility:
+                          hoveredProduct === p.id ? "visible" : "hidden",
                         transition: "all .5s ease-in-out",
-                        opacity: addToCart.opacity,
+                        opacity: hoveredProduct === p.id ? "1" : "0",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                         width: "65%",
@@ -143,7 +139,7 @@ export default function MobilesCarousel() {
                   </Grid>
 
                   <Grid container xs={12} alignItems={"center"}>
-                    <Grid xs={6}>
+                    <Grid item={true} xs={6}>
                       <Typography
                         variant="subtitle1"
                         textTransform={"uppercase"}
@@ -151,7 +147,7 @@ export default function MobilesCarousel() {
                         {p.name}
                       </Typography>
                     </Grid>
-                    <Grid xs={6}>
+                    <Grid item={true} xs={6}>
                       <Typography
                         variant="subtitle1"
                         textAlign={"end"}

@@ -27,6 +27,7 @@ import SubFooter from "./Components/HomePage/SubFooter";
 import Footer from "./Components/HomePage/Footer";
 import Contact from "./Components/Contact/Contact";
 import Electronic from "./Components/Electronics/Electronic";
+import Cart from "./Components/Cart/Cart";
 
 const theme = createTheme({
   palette: {
@@ -40,74 +41,78 @@ const theme = createTheme({
 
 const products = [
   {
-    phones: [
-      {
-        id: uuidv4(),
-        name: "Iphone 10",
-        price: 980,
-        image: iphone10,
-      },
-      {
-        id: uuidv4(),
-        name: "Iphone 11",
-        price: 1100,
-        image: iphone11,
-      },
-      {
-        id: uuidv4(),
-        name: "Iphone 8",
-        price: 780,
-        image: iphone8,
-      },
-      {
-        id: uuidv4(),
-        name: "Iphone 13",
-        price: 1500,
-        image: iphone13,
-      },
-      {
-        id: uuidv4(),
-        name: "Iphone 13",
-        price: 1500,
-        image: iphone13,
-      },
-    ],
-    watches: [
-      {
-        id: uuidv4(),
-        name: " Pink watch",
-        price: 870,
-        image: watch1,
-      },
-      {
-        id: uuidv4(),
-        name: "Heavy watch",
-        price: 680,
-        image: watch2,
-      },
-      {
-        id: uuidv4(),
-        name: "Spotted watch",
-        price: 750,
-        image: watch3,
-      },
-      {
-        id: uuidv4(),
-        name: "Black watch",
-        price: 650,
-        image: watch4,
-      },
-      {
-        id: uuidv4(),
-        name: "Heavy watch",
-        price: 680,
-        image: watch2,
-      },
-    ],
+    id: uuidv4(),
+    name: "Iphone 10",
+    price: 980,
+    image: iphone10,
+    category: "phones",
+  },
+  {
+    id: uuidv4(),
+    name: "Heavy watch",
+    price: 680,
+    image: watch2,
+    category: "watches",
+  },
+  {
+    id: uuidv4(),
+    name: "Iphone 11",
+    price: 1100,
+    image: iphone11,
+    category: "phones",
+  },
+  {
+    id: uuidv4(),
+    name: "Iphone 8",
+    price: 780,
+    image: iphone8,
+    category: "phones",
+  },
+
+  {
+    id: uuidv4(),
+    name: " Pink watch",
+    price: 870,
+    image: watch1,
+    category: "watches",
+  },
+  {
+    id: uuidv4(),
+    name: "Iphone 13",
+    price: 1500,
+    image: iphone13,
+    category: "phones",
+  },
+
+  {
+    id: uuidv4(),
+    name: "Heavy watch",
+    price: 680,
+    image: watch2,
+    category: "watches",
+  },
+  {
+    id: uuidv4(),
+    name: "Spotted watch",
+    price: 750,
+    image: watch3,
+    category: "watches",
+  },
+  {
+    id: uuidv4(),
+    name: "Iphone 13",
+    price: 1500,
+    image: iphone13,
+    category: "phones",
+  },
+  {
+    id: uuidv4(),
+    name: "Black watch",
+    price: 650,
+    image: watch4,
+    category: "watches",
   },
 ];
-
-console.log("the array is ", [...Array()]);
 
 function App() {
   const [productCounter, setProductCounter] = useState(0);
@@ -126,6 +131,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/electronics" element={<Electronic />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
           </Routes>

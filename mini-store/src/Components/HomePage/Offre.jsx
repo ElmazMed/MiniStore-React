@@ -21,6 +21,7 @@ export default function Offre() {
         <Grid container alignItems="center">
           <Grid
             xs={6}
+            item
             display={"flex"}
             flexDirection={"column"}
             alignItems={"flex-end"}
@@ -85,6 +86,7 @@ export default function Offre() {
           </Grid>
           <Grid
             xs={6}
+            item
             display={"flex"}
             justifyContent={"flex-end"}
             alignItems={"flex-end"}

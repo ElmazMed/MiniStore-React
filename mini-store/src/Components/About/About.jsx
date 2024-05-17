@@ -10,6 +10,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+// import { Link } from "react-router-dom";
+
 import TrustBadge from "../HomePage/TrustBadge";
 import "../../App.css";
 
@@ -102,6 +104,7 @@ export default function About() {
                 How was Ministore found?
               </Typography>
             )}
+
             {isSm && (
               <Typography
                 variant="h6"
@@ -138,7 +141,13 @@ export default function About() {
                 fontSize: "1rem",
               }}
             >
-              Shop our store
+              <Link
+                href="/electronics"
+                style={{ textDecoration: "none", color: "#ffff" }}
+              >
+                {" "}
+                Shop our store
+              </Link>
             </Button>
           </Grid>
         </Grid>

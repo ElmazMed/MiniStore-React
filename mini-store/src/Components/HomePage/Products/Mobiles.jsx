@@ -19,7 +19,7 @@ export default function Mobiles() {
     <>
       <Container>
         <Grid container mb={5}>
-          <Grid xs={6}>
+          <Grid xs={6} item>
             {isMd && (
               <Typography variant="h5" textTransform={"uppercase"}>
                 Mobile Products
@@ -35,8 +35,11 @@ export default function Mobiles() {
               </Typography>
             )}
           </Grid>
-          <Grid xs={6}>
-            <Link style={{ textDecoration: "none", textAlign: "end" }}>
+          <Grid xs={6} item>
+            <Link
+              to="/electronics"
+              style={{ textDecoration: "none", textAlign: "end" }}
+            >
               <li style={{ fontSize: ".9rem" }}>Go to shop</li>
             </Link>
           </Grid>

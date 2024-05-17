@@ -24,7 +24,7 @@ export default function Footer() {
     <>
       <Container>
         <Grid container mt={6} mb={10}>
-          <Grid xs={6} md={3} mb={4}>
+          <Grid xs={6} item={true} md={3} mb={4}>
             {isMd && (
               <Typography variant="h4" fontWeight={"500"} mb={2}>
                 MiniStore.
@@ -62,7 +62,7 @@ export default function Footer() {
               </a>
             </Stack>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid xs={6} item={true} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}
@@ -95,7 +95,7 @@ export default function Footer() {
               </Link>
             </ul>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid xs={6} item={true} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}
@@ -128,7 +128,7 @@ export default function Footer() {
               </Link>
             </ul>
           </Grid>
-          <Grid xs={6} md={3}>
+          <Grid xs={6} item={true} md={3}>
             <Typography
               variant="h6"
               textAlign={"center"}

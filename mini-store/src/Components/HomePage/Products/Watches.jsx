@@ -13,7 +13,7 @@ export default function Watches() {
     <>
       <Container>
         <Grid container mb={5} mt={20}>
-          <Grid xs={6}>
+          <Grid xs={6} item>
             {isMd && (
               <Typography variant="h5" textTransform={"uppercase"}>
                 Smart Watches
@@ -29,8 +29,11 @@ export default function Watches() {
               </Typography>
             )}
           </Grid>
-          <Grid xs={6}>
-            <Link style={{ textDecoration: "none", textAlign: "end" }}>
+          <Grid xs={6} item>
+            <Link
+              to="/electronics"
+              style={{ textDecoration: "none", textAlign: "end" }}
+            >
               <li style={{ fontSize: ".9rem" }}>Go to shop</li>
             </Link>
           </Grid>

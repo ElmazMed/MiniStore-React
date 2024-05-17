@@ -42,6 +42,7 @@ export default function TrustBadge() {
           <Grid
             xs={12}
             sm={3}
+            item
             display={{ xs: "flex" }}
             flexDirection={"column"}
             alignItems={{ xs: "center", sm: "baseline" }}
@@ -70,6 +71,7 @@ export default function TrustBadge() {
           <Grid
             xs={12}
             sm={3}
+            item
             display={{ xs: "flex" }}
             flexDirection={"column"}
             alignItems={{ xs: "center", sm: "baseline" }}
@@ -98,6 +100,7 @@ export default function TrustBadge() {
           <Grid
             xs={12}
             sm={3}
+            item
             display={{ xs: "flex" }}
             flexDirection={"column"}
             alignItems={{ xs: "center", sm: "baseline" }}
