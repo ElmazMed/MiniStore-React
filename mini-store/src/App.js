@@ -46,6 +46,7 @@ const products = [
     price: 980,
     image: iphone10,
     category: "phones",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -53,6 +54,7 @@ const products = [
     price: 680,
     image: watch2,
     category: "watches",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -60,6 +62,7 @@ const products = [
     price: 1100,
     image: iphone11,
     category: "phones",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -67,6 +70,7 @@ const products = [
     price: 780,
     image: iphone8,
     category: "phones",
+    quantity: 1,
   },
 
   {
@@ -75,6 +79,7 @@ const products = [
     price: 870,
     image: watch1,
     category: "watches",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -82,6 +87,7 @@ const products = [
     price: 1500,
     image: iphone13,
     category: "phones",
+    quantity: 1,
   },
 
   {
@@ -90,6 +96,7 @@ const products = [
     price: 680,
     image: watch2,
     category: "watches",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -97,6 +104,7 @@ const products = [
     price: 750,
     image: watch3,
     category: "watches",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -104,6 +112,7 @@ const products = [
     price: 1500,
     image: iphone13,
     category: "phones",
+    quantity: 1,
   },
   {
     id: uuidv4(),
@@ -111,11 +120,13 @@ const products = [
     price: 650,
     image: watch4,
     category: "watches",
+    quantity: 1,
   },
 ];
 
 function App() {
   const [productCounter, setProductCounter] = useState(0);
+  const [cartProducts, setCartProducts] = useState([]);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -124,6 +135,8 @@ function App() {
             products,
             productCounter,
             setProductCounter,
+            cartProducts,
+            setCartProducts,
           }}
         >
           <Nav />

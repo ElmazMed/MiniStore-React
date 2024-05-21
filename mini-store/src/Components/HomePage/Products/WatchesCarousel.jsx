@@ -12,8 +12,13 @@ import Fade from "@mui/material/Fade";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function WatchesCarousel() {
-  const { products, setProductCounter, productCounter } =
-    useContext(ProductsContext);
+  const {
+    products,
+    setProductCounter,
+    productCounter,
+    cartProducts,
+    setCartProducts,
+  } = useContext(ProductsContext);
 
   const watchesProducts = products.filter((p) => p.category === "watches");
 
@@ -79,13 +84,35 @@ export default function WatchesCarousel() {
   const handleMouseOut = () => {
     setHoveredProduct(null);
   };
-  const handleAddToCart = (Transition) => () => {
-    setState({
-      open: true,
-      Transition,
-    });
-    setProductCounter(productCounter + 1);
-  };
+  const handleAddToCart =
+    (Transition, id, image, name, price, quantity) => () => {
+      let addToCart = true;
+
+      cartProducts.map((p) => {
+        if (p.id === id) {
+          addToCart = false;
+          alert("Product already in cart");
+        }
+      });
+
+      if (addToCart) {
+        setCartProducts([
+          ...cartProducts,
+          {
+            image: image,
+            id: id,
+            name: name,
+            price: price,
+            quantity: quantity,
+          },
+        ]);
+        setProductCounter(cartProducts.length + 1);
+        setState({
+          open: true,
+          Transition,
+        });
+      }
+    };
 
   return (
     <>
@@ -132,7 +159,14 @@ export default function WatchesCarousel() {
                         transform: "translate(-50%, -50%)",
                         width: "65%",
                       }}
-                      onClick={handleAddToCart(SlideTransition)}
+                      onClick={handleAddToCart(
+                        SlideTransition,
+                        p.id,
+                        p.image,
+                        p.name,
+                        p.price,
+                        p.quantity
+                      )}
                       endIcon={<ShoppingCartIcon />}
                     >
                       Add to cart

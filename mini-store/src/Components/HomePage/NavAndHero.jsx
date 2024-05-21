@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function NavAndHero() {
   const theme = useTheme();
@@ -69,7 +70,12 @@ export default function NavAndHero() {
                   fontSize: "1rem",
                 }}
               >
-                Shop Product
+                <Link
+                  to="/electronics"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Shop Product
+                </Link>
               </Button>
             </Grid>
             <Grid xs={12} item md={6} marginBottom={"-3.5rem"}>

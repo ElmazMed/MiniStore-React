@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Button, Grid, Typography } from "@mui/material";
 
@@ -9,36 +9,59 @@ import { ProductsContext } from "../HomePage/Products/ProductsContext";
 import SideBar from "./SideBar";
 
 export default function ProductsAndSidebar() {
-  const { products, setProductCounter, productCounter } =
-    useContext(ProductsContext);
-
-  const [categoriesFilter, setCategoriesFilter] = useState("all");
+  const {
+    products,
+    setProductCounter,
+    productCounter,
+    cartProducts,
+    setCartProducts,
+  } = useContext(ProductsContext);
+  const [filtredProducts, setFiltredProducts] = useState(products);
 
   //PAGINATION//
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 9;
+  const [productsPerPage, setProductsPerPage] = useState(9);
 
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
-  const currentProducts = products.slice(firstProduct, lastProduct);
+  const currentProducts = filtredProducts.slice(firstProduct, lastProduct);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //======= PAGINATION ========//
 
-  const handleAddToCart = () => {
-    setProductCounter(productCounter + 1);
+  const handleAddToCart = (image, id, name, price, quantity) => {
+    let addToCart = true;
+    cartProducts.map((p) => {
+      if (p.id === id) {
+        addToCart = false;
+        alert("This product is already in the cart");
+      }
+    });
+
+    if (addToCart) {
+      setCartProducts([
+        {
+          ...cartProducts,
+          image: image,
+          id: id,
+          name: name,
+          price: price,
+          quantity: quantity,
+        },
+      ]);
+      setProductCounter(cartProducts.length + 1);
+    }
   };
 
-  const handleAllBtn = () => {};
-  /* const handlePhonesBtn = () => {
-    const phones = categoriesFilter.filter((p) => p.category === "phones");
-    setCategoriesFilter(phones);
+  const handleAllBtn = () => {
+    setFiltredProducts(products);
   };
-
-  const handleWatchesBtn = () => {
-    const watches = categoriesFilter.filter((p) => p.category === "watches");
-    setCategoriesFilter(watches);
-  }; */
+  const filterCategory = (category) => {
+    const filterBtn = products.filter(
+      (current) => current.category === category
+    );
+    setFiltredProducts(filterBtn);
+  };
 
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -52,7 +75,7 @@ export default function ProductsAndSidebar() {
   return (
     <>
       <Grid container mt={12} mb={12}>
-        <Grid xs={8}>
+        <Grid xs={8} item>
           <div>
             <Grid container>
               {/* The First slide */}
@@ -65,7 +88,7 @@ export default function ProductsAndSidebar() {
                     onMouseOver={() => handleMouseOver(p.id)}
                     onMouseOut={handleMouseOut}
                   >
-                    <Grid width={"75%"} position={"relative"}>
+                    <Grid width={"75%"} position={"relative"} item>
                       <img src={p.image} width={"100%"} alt="" />
 
                       <Button
@@ -85,14 +108,28 @@ export default function ProductsAndSidebar() {
                           transform: "translate(-50%, -50%)",
                           width: "75%",
                         }}
-                        // onClick={handleAddToCart()}
+                        onClick={() => {
+                          handleAddToCart(
+                            p.image,
+                            p.id,
+                            p.name,
+                            p.price,
+                            p.quantity
+                          );
+                        }}
                         endIcon={<ShoppingCartIcon />}
                       >
                         Add to cart
                       </Button>
                     </Grid>
-                    <Grid container xs={12} alignItems={"center"} width={"75%"}>
-                      <Grid xs={6}>
+                    <Grid
+                      container
+                      xs={12}
+                      item
+                      alignItems={"center"}
+                      width={"75%"}
+                    >
+                      <Grid xs={6} item>
                         <Typography
                           variant="subtitle1"
                           textTransform={"uppercase"}
@@ -100,7 +137,7 @@ export default function ProductsAndSidebar() {
                           {p.name}
                         </Typography>
                       </Grid>
-                      <Grid xs={6}>
+                      <Grid xs={6} item>
                         <Typography
                           variant="subtitle1"
                           textAlign={"end"}
@@ -126,8 +163,11 @@ export default function ProductsAndSidebar() {
             </div>
           </div>
         </Grid>
-        <Grid xs={4}>
-          <SideBar />
+        <Grid xs={4} item>
+          <SideBar
+            filterCategory={(category) => filterCategory(category)}
+            handleAllBtn={handleAllBtn}
+          />
         </Grid>
       </Grid>
     </>

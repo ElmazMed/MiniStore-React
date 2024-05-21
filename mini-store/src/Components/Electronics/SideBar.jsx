@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 
-import { ProductsContext } from "../HomePage/Products/ProductsContext";
-
-export default function SideBar() {
-  const { products } = useContext(ProductsContext);
+export default function SideBar({ filterCategory, handleAllBtn }) {
   return (
     <>
       <Grid container flexDirection={"column"}>
@@ -22,16 +19,26 @@ export default function SideBar() {
               flexDirection: "column",
             }}
           >
-            <Button style={{ justifyContent: "flex-start" }}>All</Button>
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={handleAllBtn}
+            >
+              All
+            </Button>
             <Button
               style={{ justifyContent: "flex-start" }}
               onClick={() => {
-                products.filter((p) => p.category === "phones");
+                filterCategory("phones");
               }}
             >
               Phones
             </Button>
-            <Button style={{ justifyContent: "flex-start" }}>Watches</Button>
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={() => filterCategory("watches")}
+            >
+              Watches
+            </Button>
           </div>
         </Grid>
         <Grid mb={5}>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -12,8 +12,13 @@ import Fade from "@mui/material/Fade";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function MobilesCarousel() {
-  const { products, setProductCounter, productCounter } =
-    useContext(ProductsContext);
+  const {
+    products,
+    setProductCounter,
+    productCounter,
+    cartProducts,
+    setCartProducts,
+  } = useContext(ProductsContext);
 
   const phonesProducts = products.filter((p) => p.category === "phones");
 
@@ -79,13 +84,37 @@ export default function MobilesCarousel() {
   const handleMouseOut = () => {
     setHoveredProduct(null);
   };
-  const handleAddToCart = (Transition) => () => {
-    setState({
-      open: true,
-      Transition,
-    });
-    setProductCounter(productCounter + 1);
-  };
+
+  const handleAddToCart =
+    (Transition, image, id, name, price, quantity) => () => {
+      let addToCart = true;
+
+      cartProducts.map((p) => {
+        if (p.id === id) {
+          addToCart = false;
+          alert("Product is already in the cart");
+        }
+      });
+
+      if (addToCart) {
+        setCartProducts([
+          ...cartProducts,
+          {
+            id: id,
+            image: image,
+            name: name,
+            price: price,
+            quantity: quantity,
+          },
+        ]);
+        setProductCounter(cartProducts.length + 1);
+        setState({
+          open: true,
+          Transition,
+        });
+      }
+    };
+
   return (
     <>
       <Snackbar
@@ -131,14 +160,21 @@ export default function MobilesCarousel() {
                         transform: "translate(-50%, -50%)",
                         width: "65%",
                       }}
-                      onClick={handleAddToCart(SlideTransition)}
+                      onClick={handleAddToCart(
+                        SlideTransition,
+                        p.image,
+                        p.id,
+                        p.name,
+                        p.price,
+                        p.quantity
+                      )}
                       endIcon={<ShoppingCartIcon />}
                     >
                       Add to cart
                     </Button>
                   </Grid>
 
-                  <Grid container xs={12} alignItems={"center"}>
+                  <Grid container xs={12} item alignItems={"center"}>
                     <Grid item={true} xs={6}>
                       <Typography
                         variant="subtitle1"

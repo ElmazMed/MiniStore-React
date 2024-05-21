@@ -1,28 +1,54 @@
-import {
-  Breadcrumbs,
-  Button,
-  Container,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+
 import Subscription from "../HomePage/Subscription";
 import ShopInsta from "../HomePage/ShopInsta";
 import Footer from "../HomePage/Footer";
 import SubFooter from "../HomePage/SubFooter";
-import CloseIcon from "@mui/icons-material/Close";
-import iphone from "../../Images/phone-2.png";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import { ProductsContext } from "../HomePage/Products/ProductsContext";
 
 import "../../App.css";
+import CtaCart from "./CtaCart";
 
 export default function Cart() {
-  const [productQuantity, setProductQuantity] = useState(0);
-  function handleClick(event) {
-    //   event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
+  const { cartProducts, setCartProducts, setProductCounter } =
+    useContext(ProductsContext);
+
+  //REMOVE THE ITEM FORM THE CART
+  const handleRemoveBtn = (id) => {
+    const removeCartProduct = cartProducts.filter((p) => p.id != id);
+    setCartProducts(removeCartProduct);
+    setProductCounter(cartProducts.length - 1);
+  };
+
+  // DECREASE THE QUANTITY OF THE PRODUCT IN THE CART
+  const reduceQuantity = (id) => {
+    const updatedCartQuantity = cartProducts.map((p) => {
+      return p.id === id && p.quantity >= 2
+        ? { ...p, quantity: p.quantity - 1 }
+        : { ...p, quantity: p.quantity };
+    });
+    setCartProducts(updatedCartQuantity);
+  };
+
+  // INCREASE THE QUANTITY OF THE PRODUCT IN THE CART
+  const increaseQuantity = (id) => {
+    const updatedCartQuantity = cartProducts.map((p) => {
+      return p.id === id ? { ...p, quantity: p.quantity + 1 } : p;
+    });
+    setCartProducts(updatedCartQuantity);
+  };
+
+  //COUNTING THE TOTAL OF ALL THE PRODUCTS IN THE CART WITH THEIR QUANTITY
+  const subtotal = [0];
+  cartProducts.map((p) => {
+    subtotal.push(p.quantity * p.price);
+  });
+  const total = subtotal.reduce((acc, curr) => acc + curr);
+
   return (
     <>
       <Stack
@@ -41,99 +67,88 @@ export default function Cart() {
           >
             Cart
           </Typography>
-
-          <div
-            role="presentation"
-            onClick={handleClick}
-            style={{ marginTop: "1.5rem" }}
-          >
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link underline="hover" color="inherit" href="/">
-                Home
-              </Link>
-              <Link
-                underline="hover"
-                color="inherit"
-                href="/material-ui/getting-started/installation/"
-              >
-                Core
-              </Link>
-              <Link
-                underline="hover"
-                color="text.primary"
-                href="/material-ui/react-breadcrumbs/"
-                aria-current="page"
-              >
-                Breadcrumbs
-              </Link>
-            </Breadcrumbs>
-          </div>
         </Container>
       </Stack>
       <Container>
-        <Grid container my={10} alignItems={"center"}>
-          <div className="cart-product-container">
-            <Grid xs={6}>
-              <div className="cart-prodcut">
-                <img src={iphone} alt="" style={{ maxWidth: "20%" }} />
-                <div>
-                  <Typography variant="subtitle1" textTransform={"uppercase"}>
-                    Iphone 13
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    color={"secondary"}
-                    textTransform={"uppercase"}
-                  >
-                    $ 1500
-                  </Typography>
-                </div>
-              </div>
-            </Grid>
-            <Grid xs={3}>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  justifyContent: "center",
-                }}
-              >
-                <Button
-                  onClick={() => setProductQuantity(productQuantity - 1)}
-                  style={{ boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)" }}
+        <Grid
+          container
+          className="cart-product-wrapper"
+          mt={10}
+          alignItems={"center"}
+        >
+          {cartProducts.map((p) => {
+            return (
+              <div className="cart-product-container" key={p.id}>
+                <Grid xs={5}>
+                  <div className="cart-prodcut">
+                    <img src={p.image} alt="" style={{ maxWidth: "20%" }} />
+                    <div>
+                      <Typography
+                        variant="subtitle1"
+                        textTransform={"uppercase"}
+                      >
+                        {p.name}
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        color={"secondary"}
+                        textTransform={"uppercase"}
+                      >
+                        $ {p.price}
+                      </Typography>
+                    </div>
+                  </div>
+                </Grid>
+                <Grid xs={2}>
+                  <form className="cart-form">
+                    <Button
+                      onClick={() => reduceQuantity(p.id)}
+                      style={{
+                        boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)",
+                        minWidth: "43px",
+                      }}
+                    >
+                      -
+                    </Button>
+                    <input
+                      type="number"
+                      value={p.quantity}
+                      className="cart-quantity"
+                      defaultValue
+                    />
+                    <Button
+                      onClick={() => increaseQuantity(p.id)}
+                      style={{
+                        boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)",
+                        minWidth: "43px",
+                      }}
+                    >
+                      +
+                    </Button>
+                  </form>
+                </Grid>
+                <Grid
+                  xs={2}
+                  display={"flex"}
+                  justifyContent={"flex-end"}
+                  alignItems={"center"}
+                  gap={1}
+                  item
                 >
-                  -
-                </Button>
-                <input
-                  type="number"
-                  value={productQuantity < 1 ? 1 : productQuantity}
-                  className="cart-quantity"
-                />
-                <Button
-                  onClick={() => setProductQuantity(productQuantity + 1)}
-                  style={{ boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)" }}
-                >
-                  +
-                </Button>
+                  <Typography variant="h6" color={"secondary"}>
+                    $ {p.price * p.quantity}
+                  </Typography>
+                </Grid>
+                <Grid xs={3} item display={"flex"} justifyContent={"flex-end"}>
+                  <Button onClick={() => handleRemoveBtn(p.id)}>
+                    <DeleteIcon />
+                  </Button>
+                </Grid>
               </div>
-            </Grid>
-            <Grid
-              xs={3}
-              display={"flex"}
-              justifyContent={"flex-end"}
-              alignItems={"center"}
-              gap={1}
-            >
-              <Typography variant="h6" color={"secondary"}>
-                $ 1500
-              </Typography>
-              <Button>
-                <CloseIcon />
-              </Button>
-            </Grid>
-          </div>
-          <div className="divider"></div>
+            );
+          })}
         </Grid>
+        <CtaCart total={total} />
       </Container>
       <Subscription />
       <ShopInsta />
