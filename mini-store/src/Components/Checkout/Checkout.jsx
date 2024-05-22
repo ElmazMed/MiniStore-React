@@ -1,20 +1,24 @@
 import React from "react";
 import {
-  Button,
   Container,
-  FormControl,
-  FormControlLabel,
   Grid,
-  Radio,
-  RadioGroup,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import CheckoutForm from "./CheckoutForm";
 
 import "../Checkout/Checkout.css";
+import OrderSumm from "./OrderSumm";
+import { useTheme } from "@emotion/react";
+import Subscription from "../HomePage/Subscription";
+import ShopInsta from "../HomePage/ShopInsta";
 
 export default function Checkout() {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Stack
@@ -37,47 +41,26 @@ export default function Checkout() {
         </Container>
       </Stack>
       <Container mt={20}>
-        <Grid container>
-          <Grid xs={12} md={6}>
+        <Grid container flexDirection={isSm ? "column-reverse" : "row"}>
+          <Grid xs={12} md={6} mb={8} item>
             <Typography variant="h6" textTransform={"uppercase"} mb={3}>
               Billing details:
             </Typography>
             <CheckoutForm />
           </Grid>
-          <Grid xs={12} md={6}>
-            <Typography variant="h6" textTransform={"uppercase"} mb={3}>
-              Additional information:
-            </Typography>
-            <form action="">
-              <label htmlFor="">Order notes (optional)</label>
-              <input
-                type="text"
-                placeholder="Notes about your order. Like special notes for delivery."
-              />
-            </form>
-          </Grid>
-          <Grid xs={12}>
-            <FormControl>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="Cash on delivery"
-                name="radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="Cash on delivery"
-                  control={<Radio />}
-                  label="Cash on delivery"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid xs={12} mt={3}>
-            <Button variant="contained" className="checkout-cta">
-              Place an order
-            </Button>
+          <Grid
+            xs={12}
+            md={6}
+            mb={3}
+            display={"flex"}
+            justifyContent={isSm ? "center" : "flex-end"}
+          >
+            <OrderSumm />
           </Grid>
         </Grid>
       </Container>
+      <Subscription />
+      <ShopInsta />
     </>
   );
 }

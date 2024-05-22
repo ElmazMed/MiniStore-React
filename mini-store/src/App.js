@@ -29,6 +29,7 @@ import Contact from "./Components/Contact/Contact";
 import Electronic from "./Components/Electronics/Electronic";
 import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
+import ThankPage from "./Components/ThankYou/ThankPage";
 
 const theme = createTheme({
   palette: {
@@ -128,6 +129,7 @@ const products = [
 function App() {
   const [productCounter, setProductCounter] = useState(0);
   const [cartProducts, setCartProducts] = useState([]);
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -147,6 +149,7 @@ function App() {
             <Route path="/electronics" element={<Electronic />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/thank-you" element={<ThankPage />} />
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
           </Routes>

@@ -2,7 +2,7 @@ label {
     color: #3A3A3A;
     font-size: 15px;
 }
-input {
+.checkout-info {
     padding: .6rem .3rem .6rem .3rem;
     border: 1px solid #cccccc;
     border-radius: .2rem;
@@ -14,6 +14,19 @@ input {
 }
 .checkout-cta{
     border-radius: 0 !important;
-    padding-inline: 2rem !important;
     letter-spacing: 1px;
+    width: 45%;
+}
+
+.checkout-products-container {
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    border-radius: 1rem;
+    width: 60%;
+    padding: 1rem;
+    height: fit-content;
+}
+.order-summ-box{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .6rem;
 }

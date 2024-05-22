@@ -24,7 +24,7 @@ export default function Cart() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
   const { cartProducts, setCartProducts, setProductCounter } =
     useContext(ProductsContext);
 
@@ -127,7 +127,7 @@ export default function Cart() {
                     className="cart-form"
                     style={{
                       justifyContent: isSm ? "flex-start" : "center",
-                      width: isSm ? "50%" : "100%",
+                      width: isSm ? "50%" : "unset",
                     }}
                   >
                     <Button

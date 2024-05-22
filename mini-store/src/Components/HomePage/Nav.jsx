@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 import { ProductsContext } from "./Products/ProductsContext";
+
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
