@@ -8,13 +8,27 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { ProductsContext } from "../HomePage/Products/ProductsContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutForm() {
-  const { cartProducts } = useContext(ProductsContext);
+  const { cartProducts, setCartProducts, setProductCounter } =
+    useContext(ProductsContext);
+  const navigate = useNavigate();
+
   // ADDING STATES FOR THE INPUTS TO CHANGE AND READ THE VALUE
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    setCartProducts([]);
+    setProductCounter(0);
+    navigate("/thank-you");
+  };
   return (
     <>
-      <form style={{ display: "flex", flexDirection: "column" }}>
+      <form
+        style={{ display: "flex", flexDirection: "column" }}
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="">Last name *</label>
         <input className="checkout-info" type="text" required />
         <label htmlFor="">Full address *</label>
@@ -50,7 +64,6 @@ export default function CheckoutForm() {
         <Button
           disabled={cartProducts.length === 0 ? true : false}
           type="submit"
-          onClick={() => alert("Submitted")}
           variant="contained"
           className="checkout-cta"
         >

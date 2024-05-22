@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Container,
@@ -13,11 +13,15 @@ import { useTheme } from "@emotion/react";
 import thankyou from "../../Images/thankyou.svg";
 import person from "../../Images/person.png";
 
+import { ProductsContext } from "../HomePage/Products/ProductsContext";
+
 export default function ThankPage() {
+  const { cartProducts } = useContext(ProductsContext);
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   // const isMd = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <>
       <Container>
@@ -29,7 +33,7 @@ export default function ThankPage() {
           gap={3}
         >
           <Typography
-            variant={isSm ? "h3" : "h2"}
+            variant={isSm ? "h4" : "h2"}
             fontWeight="600"
             color="secondary"
             textTransform={"uppercase"}
@@ -39,7 +43,7 @@ export default function ThankPage() {
           </Typography>
           <img src={thankyou} alt="" />
           <Typography
-            variant={isSm ? "h6" : "h5"}
+            variant={isSm ? "subtitle1" : "h5"}
             fontWeight="600"
             color="secondary"
             textTransform={"uppercase"}
