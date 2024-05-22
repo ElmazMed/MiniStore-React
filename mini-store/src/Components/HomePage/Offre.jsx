@@ -32,57 +32,30 @@ export default function Offre() {
             >
               ― 10% off
             </Typography>
-            {isMd && (
-              <Typography
-                style={{
-                  fontSize: "3.9rem",
-                  fontWeight: "300",
-                  textTransform: "uppercase",
-                }}
-              >
-                New year sale
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                style={{
-                  fontSize: "1.3rem",
-                  fontWeight: "300",
-                  textTransform: "uppercase",
-                }}
-              >
-                New year sale
-              </Typography>
-            )}
-            {isMd && (
-              <Button
-                variant="contained"
-                color="primary"
-                style={{
-                  textTransform: "uppercase",
-                  borderRadius: "0",
-                  fontWeight: "200",
-                  fontSize: "1rem",
-                }}
-              >
-                Shop Sale
-              </Button>
-            )}
-            {isSm && (
-              <Button
-                variant="contained"
-                color="primary"
-                style={{
-                  textTransform: "uppercase",
-                  borderRadius: "0",
-                  fontWeight: "200",
-                  fontSize: ".7rem",
-                  marginBottom: "1rem",
-                }}
-              >
-                Shop Sale
-              </Button>
-            )}
+
+            <Typography
+              style={{
+                fontSize: isSm ? "1.3rem" : "3.9rem",
+                fontWeight: "300",
+                textTransform: "uppercase",
+              }}
+            >
+              New year sale
+            </Typography>
+
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                textTransform: "uppercase",
+                borderRadius: "0",
+                fontWeight: "200",
+                fontSize: isSm ? ".7rem" : "1rem",
+                marginBottom: isSm ? "1rem" : "0",
+              }}
+            >
+              Shop Sale
+            </Button>
           </Grid>
           <Grid
             xs={6}

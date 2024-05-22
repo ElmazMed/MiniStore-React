@@ -14,20 +14,13 @@ export default function Watches() {
       <Container>
         <Grid container mb={5} mt={20}>
           <Grid xs={6} item>
-            {isMd && (
-              <Typography variant="h5" textTransform={"uppercase"}>
-                Smart Watches
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                variant="h6"
-                fontSize={"1rem"}
-                textTransform={"uppercase"}
-              >
-                Smart Watches
-              </Typography>
-            )}
+            <Typography
+              variant={isSm ? "h6" : "h5"}
+              fontSize={isSm ? "1rem" : "1.4rem"}
+              textTransform={"uppercase"}
+            >
+              Smart Watches
+            </Typography>
           </Grid>
           <Grid xs={6} item>
             <Link

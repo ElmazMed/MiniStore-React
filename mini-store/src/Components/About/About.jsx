@@ -1,16 +1,13 @@
 import React from "react";
 import {
-  Breadcrumbs,
   Button,
   Container,
   Grid,
-  Link,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-// import { Link } from "react-router-dom";
 
 import TrustBadge from "../HomePage/TrustBadge";
 import "../../App.css";
@@ -18,11 +15,7 @@ import "../../App.css";
 import about from "../../Images/about.png";
 import ReviewsAndSubs from "../HomePage/ReviewsAndSubs";
 import ShopInsta from "../HomePage/ShopInsta";
-
-function handleClick(event) {
-  //   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
+import { Link } from "react-router-dom";
 
 export default function About() {
   const theme = useTheme();
@@ -47,33 +40,6 @@ export default function About() {
           >
             About us
           </Typography>
-
-          <div
-            role="presentation"
-            onClick={handleClick}
-            style={{ marginTop: "1.5rem" }}
-          >
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link underline="hover" color="inherit" href="/">
-                Home
-              </Link>
-              <Link
-                underline="hover"
-                color="inherit"
-                href="/material-ui/getting-started/installation/"
-              >
-                Core
-              </Link>
-              <Link
-                underline="hover"
-                color="text.primary"
-                href="/material-ui/react-breadcrumbs/"
-                aria-current="page"
-              >
-                Breadcrumbs
-              </Link>
-            </Breadcrumbs>
-          </div>
         </Container>
       </Stack>
       <TrustBadge />
@@ -97,7 +63,7 @@ export default function About() {
           >
             {isMd && (
               <Typography
-                variant="h5"
+                variant={isSm ? "h6" : "h5"}
                 textTransform={"uppercase"}
                 letterSpacing={"2px"}
               >
@@ -105,15 +71,6 @@ export default function About() {
               </Typography>
             )}
 
-            {isSm && (
-              <Typography
-                variant="h6"
-                textTransform={"uppercase"}
-                letterSpacing={"2px"}
-              >
-                How was Ministore found?
-              </Typography>
-            )}
             <Typography
               variant="subtitle2"
               mb={3}
@@ -142,7 +99,7 @@ export default function About() {
               }}
             >
               <Link
-                href="/electronics"
+                to="/electronics"
                 style={{ textDecoration: "none", color: "#ffff" }}
               >
                 {" "}

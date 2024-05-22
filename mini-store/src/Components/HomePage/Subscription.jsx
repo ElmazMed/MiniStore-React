@@ -25,51 +25,27 @@ export default function Subscription() {
           alignItems={"center"}
         >
           <Grid xs={12} item md={6}>
-            {isMd && (
-              <Typography
-                variant="h5"
-                textTransform={"uppercase"}
-                letterSpacing={"2px"}
-                color={"#ffff"}
-              >
-                Subscribe us now
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                variant="h6"
-                fontSize={"1rem"}
-                textTransform={"uppercase"}
-                letterSpacing={"2px"}
-                textAlign={"center"}
-                color={"#ffff"}
-              >
-                Subscribe us now
-              </Typography>
-            )}
-            {isMd && (
-              <Typography
-                variant="subtitle1"
-                fontWeight={"200"}
-                color={"#ffff"}
-              >
-                Get latest news, updates and deals directly mailed to your
-                inbox.
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                variant="subtitle2"
-                fontSize={".9rem"}
-                textAlign={"center"}
-                fontWeight={"200"}
-                color={"#ffff"}
-                mb={2}
-              >
-                Get latest news, updates and deals directly mailed to your
-                inbox.
-              </Typography>
-            )}
+            <Typography
+              variant={isSm ? "h6" : "h5"}
+              fontSize={"1rem"}
+              textTransform={"uppercase"}
+              letterSpacing={"2px"}
+              textAlign={isSm ? "center" : "normal"}
+              color={"#ffff"}
+            >
+              Subscribe us now
+            </Typography>
+
+            <Typography
+              variant={isSm ? "subtitle2" : "subtitle1"}
+              fontSize={isSm ? ".9rem" : "1.2rem"}
+              textAlign={isSm ? "center" : "normal"}
+              fontWeight={"200"}
+              color={"#ffff"}
+              mb={isSm ? 2 : 0}
+            >
+              Get latest news, updates and deals directly mailed to your inbox.
+            </Typography>
           </Grid>
           <Grid xs={12} item md={6}>
             <form
@@ -87,37 +63,21 @@ export default function Subscription() {
                 }}
                 required
               />
-              {isMd && (
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  style={{
-                    borderRadius: "0",
-                    width: "30%",
-                    color: "#ffff",
-                    letterSpacing: "2px",
-                  }}
-                >
-                  Subscribe
-                </Button>
-              )}
-              {isSm && (
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  style={{
-                    borderRadius: "0",
-                    width: "30%",
-                    color: "#ffff",
-                    letterSpacing: "1px",
-                    fontSize: ".7rem",
-                  }}
-                >
-                  Subscribe
-                </Button>
-              )}
+
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+                style={{
+                  borderRadius: "0",
+                  width: "30%",
+                  color: "#ffff",
+                  letterSpacing: isSm ? "1px" : "2px",
+                  fontSize: isSm ? ".7rem" : "1rem",
+                }}
+              >
+                Subscribe
+              </Button>
             </form>
           </Grid>
         </Grid>

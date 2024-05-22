@@ -50,8 +50,8 @@ const products = [
   },
   {
     id: uuidv4(),
-    name: "Heavy watch",
-    price: 680,
+    name: "Xiaomi watch",
+    price: 520,
     image: watch2,
     category: "watches",
     quantity: 1,

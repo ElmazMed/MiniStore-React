@@ -1,10 +1,24 @@
-import React, { useContext } from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import React from "react";
+import {
+  Button,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
-export default function SideBar({ filterCategory, handleAllBtn }) {
+export default function SideBar({ filterCategory, filterPrice, handleAllBtn }) {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
-      <Grid container flexDirection={"column"}>
+      <Grid
+        container
+        flexDirection={isSm ? "row" : "column"}
+        justifyContent={isSm ? "space-between" : "normal"}
+      >
         <Grid mb={5}>
           <Typography
             variant="subtitle1"
@@ -55,17 +69,37 @@ export default function SideBar({ filterCategory, handleAllBtn }) {
               flexDirection: "column",
             }}
           >
-            <Button style={{ justifyContent: "flex-start" }}>
-              Less than $200
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={() => {
+                filterPrice("< 700");
+              }}
+            >
+              Less than $700
             </Button>
-            <Button style={{ justifyContent: "flex-start" }}>
-              $200 - $300
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={() => {
+                filterPrice("700 - 800");
+              }}
+            >
+              $700 - $800
             </Button>
-            <Button style={{ justifyContent: "flex-start" }}>
-              $300 - $400
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={() => {
+                filterPrice("800 - 900");
+              }}
+            >
+              $800 - $900
             </Button>
-            <Button style={{ justifyContent: "flex-start" }}>
-              More than $400
+            <Button
+              style={{ justifyContent: "flex-start" }}
+              onClick={() => {
+                filterPrice("");
+              }}
+            >
+              More than $900
             </Button>
           </div>
         </Grid>

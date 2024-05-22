@@ -7,6 +7,7 @@ import insta3 from "../../Images/insta-3.png";
 import insta4 from "../../Images/insta-4.png";
 import insta5 from "../../Images/insta-5.png";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { Link } from "react-router-dom";
 
 const instaProducts = [
   { id: uuidv4(), img: insta1 },
@@ -19,7 +20,6 @@ export default function ShopInsta() {
   const [hoveredItemId, setHoveredItemId] = useState(null);
 
   const handleMouseOver = (id) => {
-    console.log(id);
     setHoveredItemId(id);
   };
 
@@ -58,7 +58,7 @@ export default function ShopInsta() {
                 transition: "all .5s ease-in-out",
               }}
             >
-              <a
+              <Link
                 href="https://www.instagram.com/elmazgourmed/"
                 target="_blank"
                 rel="noreferrer"
@@ -73,7 +73,7 @@ export default function ShopInsta() {
                     transform: "translate(-50%, -50%)",
                   }}
                 />
-              </a>
+              </Link>
             </div>
             <img src={product.img} alt="" style={{ maxWidth: "100%" }} />
           </Grid>

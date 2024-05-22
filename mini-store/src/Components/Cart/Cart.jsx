@@ -1,19 +1,30 @@
 import React, { useContext } from "react";
-import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import Subscription from "../HomePage/Subscription";
 import ShopInsta from "../HomePage/ShopInsta";
 import Footer from "../HomePage/Footer";
 import SubFooter from "../HomePage/SubFooter";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ProductsContext } from "../HomePage/Products/ProductsContext";
 
 import "../../App.css";
 import CtaCart from "./CtaCart";
 
 export default function Cart() {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
   const { cartProducts, setCartProducts, setProductCounter } =
     useContext(ProductsContext);
 
@@ -78,8 +89,14 @@ export default function Cart() {
         >
           {cartProducts.map((p) => {
             return (
-              <div className="cart-product-container" key={p.id}>
-                <Grid xs={5}>
+              <Grid
+                className="cart-product-container"
+                display={"flex"}
+                flexDirection={isSm ? "column" : "row"}
+                alignItems={isSm ? "normal" : "center"}
+                key={p.id}
+              >
+                <Grid xs={12} md={5}>
                   <div className="cart-prodcut">
                     <img src={p.image} alt="" style={{ maxWidth: "20%" }} />
                     <div>
@@ -99,8 +116,20 @@ export default function Cart() {
                     </div>
                   </div>
                 </Grid>
-                <Grid xs={2}>
-                  <form className="cart-form">
+                <Grid
+                  xs={12}
+                  md={7}
+                  mt={isSm ? 5 : 0}
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                >
+                  <form
+                    className="cart-form"
+                    style={{
+                      justifyContent: isSm ? "flex-start" : "center",
+                      width: isSm ? "50%" : "100%",
+                    }}
+                  >
                     <Button
                       onClick={() => reduceQuantity(p.id)}
                       style={{
@@ -113,6 +142,7 @@ export default function Cart() {
                     <input
                       type="number"
                       value={p.quantity}
+                      style={{ width: "20%" }}
                       className="cart-quantity"
                       defaultValue
                     />
@@ -126,25 +156,14 @@ export default function Cart() {
                       +
                     </Button>
                   </form>
-                </Grid>
-                <Grid
-                  xs={2}
-                  display={"flex"}
-                  justifyContent={"flex-end"}
-                  alignItems={"center"}
-                  gap={1}
-                  item
-                >
                   <Typography variant="h6" color={"secondary"}>
                     $ {p.price * p.quantity}
                   </Typography>
-                </Grid>
-                <Grid xs={3} item display={"flex"} justifyContent={"flex-end"}>
                   <Button onClick={() => handleRemoveBtn(p.id)}>
-                    <DeleteIcon />
+                    <DeleteOutlineIcon />
                   </Button>
                 </Grid>
-              </div>
+              </Grid>
             );
           })}
         </Grid>

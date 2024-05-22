@@ -1,6 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { Button, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -9,18 +15,19 @@ import { ProductsContext } from "../HomePage/Products/ProductsContext";
 import SideBar from "./SideBar";
 
 export default function ProductsAndSidebar() {
-  const {
-    products,
-    setProductCounter,
-    productCounter,
-    cartProducts,
-    setCartProducts,
-  } = useContext(ProductsContext);
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+
+  const { products, setProductCounter, cartProducts, setCartProducts } =
+    useContext(ProductsContext);
   const [filtredProducts, setFiltredProducts] = useState(products);
 
   //PAGINATION//
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(9);
+
+  const productsPerPage = isSm ? 4 : 9;
 
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
@@ -29,21 +36,22 @@ export default function ProductsAndSidebar() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //======= PAGINATION ========//
 
-  const handleAddToCart = (image, id, name, price, quantity) => {
+  const handleAddToCart = (id, image, name, price, quantity) => {
     let addToCart = true;
+
     cartProducts.map((p) => {
       if (p.id === id) {
         addToCart = false;
-        alert("This product is already in the cart");
+        alert("Product is already in the cart");
       }
     });
 
     if (addToCart) {
       setCartProducts([
+        ...cartProducts,
         {
-          ...cartProducts,
-          image: image,
           id: id,
+          image: image,
           name: name,
           price: price,
           quantity: quantity,
@@ -63,6 +71,18 @@ export default function ProductsAndSidebar() {
     setFiltredProducts(filterBtn);
   };
 
+  const filterPrice = (price) => {
+    const filterBtn = products.filter((p) => {
+      return price === "< 700"
+        ? p.price < 700
+        : price === "700 - 800"
+        ? p.price >= 700 && p.price <= 800
+        : price === "800 - 900"
+        ? p.price >= 800 && p.price <= 900
+        : p.price > 900;
+    });
+    setFiltredProducts(filterBtn);
+  };
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
   const handleMouseOver = (id) => {
@@ -74,8 +94,13 @@ export default function ProductsAndSidebar() {
 
   return (
     <>
-      <Grid container mt={12} mb={12}>
-        <Grid xs={8} item>
+      <Grid
+        container
+        mt={12}
+        mb={12}
+        flexDirection={isSm ? "column-reverse" : "row"}
+      >
+        <Grid xs={12} md={8} item>
           <div>
             <Grid container>
               {/* The First slide */}
@@ -83,22 +108,27 @@ export default function ProductsAndSidebar() {
                 return (
                   <Grid
                     key={p.id}
-                    mr={"-54px"}
+                    mr={isSm ? "0" : "-20px"}
                     mb={"1.3rem"}
                     onMouseOver={() => handleMouseOver(p.id)}
                     onMouseOut={handleMouseOut}
+                    xs={6}
+                    md={4}
                   >
-                    <Grid width={"75%"} position={"relative"} item>
+                    <Grid
+                      width={isSm ? "85%" : "75%"}
+                      position={"relative"}
+                      item
+                    >
                       <img src={p.image} width={"100%"} alt="" />
 
                       <Button
-                        className="add-to-cart-btn"
                         variant="contained"
                         style={{
                           position: "absolute",
                           bottom: hoveredProduct === p.id ? "20%" : "12%",
                           marginInline: "3.3%",
-                          letterSpacing: "1px",
+                          letterSpacing: isSm ? "0" : "1px",
                           borderRadius: "0",
                           visibility:
                             hoveredProduct === p.id ? "visible" : "hidden",
@@ -106,12 +136,13 @@ export default function ProductsAndSidebar() {
                           opacity: hoveredProduct === p.id ? "1" : "0",
                           left: "50%",
                           transform: "translate(-50%, -50%)",
-                          width: "75%",
+                          width: "80%",
+                          paddingInline: isSm ? "0" : "1rem",
                         }}
                         onClick={() => {
                           handleAddToCart(
-                            p.image,
                             p.id,
+                            p.image,
                             p.name,
                             p.price,
                             p.quantity
@@ -127,19 +158,19 @@ export default function ProductsAndSidebar() {
                       xs={12}
                       item
                       alignItems={"center"}
-                      width={"75%"}
+                      width={isSm ? "85%" : "75%"}
                     >
-                      <Grid xs={6} item>
+                      <Grid xs={8} item>
                         <Typography
-                          variant="subtitle1"
+                          variant={isSm ? "subtitle2" : "subtitle1"}
                           textTransform={"uppercase"}
                         >
                           {p.name}
                         </Typography>
                       </Grid>
-                      <Grid xs={6} item>
+                      <Grid xs={4} item>
                         <Typography
-                          variant="subtitle1"
+                          variant={isSm ? "subtitle2" : "subtitle1"}
                           textAlign={"end"}
                           color={"secondary"}
                         >
@@ -163,9 +194,13 @@ export default function ProductsAndSidebar() {
             </div>
           </div>
         </Grid>
-        <Grid xs={4} item>
+
+        <Grid xs={12} md={4} item>
           <SideBar
             filterCategory={(category) => filterCategory(category)}
+            filterPrice={(price) => {
+              filterPrice(price);
+            }}
             handleAllBtn={handleAllBtn}
           />
         </Grid>

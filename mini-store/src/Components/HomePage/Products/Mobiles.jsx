@@ -20,20 +20,13 @@ export default function Mobiles() {
       <Container>
         <Grid container mb={5}>
           <Grid xs={6} item>
-            {isMd && (
-              <Typography variant="h5" textTransform={"uppercase"}>
-                Mobile Products
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                variant="h6"
-                fontSize={"1rem"}
-                textTransform={"uppercase"}
-              >
-                Mobile Products
-              </Typography>
-            )}
+            <Typography
+              variant={isSm ? "h6" : "h5"}
+              fontSize={isSm ? "1rem" : "1.4rem"}
+              textTransform={"uppercase"}
+            >
+              Mobile Products
+            </Typography>
           </Grid>
           <Grid xs={6} item>
             <Link

@@ -25,41 +25,34 @@ export default function Footer() {
       <Container>
         <Grid container mt={6} mb={10}>
           <Grid xs={6} item md={3} mb={4}>
-            {isMd && (
-              <Typography variant="h4" fontWeight={"500"} mb={2}>
-                MiniStore.
-              </Typography>
-            )}
-            {isSm && (
-              <Typography variant="h5" fontWeight={"500"} mb={2}>
-                MiniStore.
-              </Typography>
-            )}
+            <Typography variant={isSm ? "h5" : "h4"} fontWeight={"500"} mb={2}>
+              MiniStore.
+            </Typography>
             <Typography variant="subtitle2" fontWeight={"300"} mb={2}>
               Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit.
               Gravida massa volutpat aenean odio erat nullam fringilla.
             </Typography>
             <Stack display={"flex"} flexDirection={"row"} gap={2}>
-              <a href="www.facebook.com" target="_blank" rel="noreferrer">
+              <Link to="www.facebook.com" target="_blank" rel="noreferrer">
                 <FacebookIcon color="primary" />
-              </a>
-              <a
-                href="https://www.instagram.com/elmazgourmed/"
+              </Link>
+              <Link
+                to="https://www.instagram.com/elmazgourmed/"
                 target="_blank"
                 rel="noreferrer"
               >
                 <InstagramIcon color="primary" />
-              </a>
-              <a href="www.x.com" target="_blank" rel="noreferrer">
+              </Link>
+              <Link to="www.x.com" target="_blank" rel="noreferrer">
                 <XIcon color="primary" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/elmazgour/"
+              </Link>
+              <Link
+                to="https://www.linkedin.com/in/elmazgour/"
                 target="_blank"
                 rel="noreferrer"
               >
                 <LinkedInIcon color="primary" />
-              </a>
+              </Link>
             </Stack>
           </Grid>
           <Grid xs={6} item md={3}>
@@ -71,26 +64,17 @@ export default function Footer() {
             >
               Quick Links
             </Typography>
-            <ul
-              style={{
-                padding: "0",
-                margin: "0",
-                display: "flex",
-                flexDirection: "column",
-                gap: ".5rem",
-                textAlign: "center",
-              }}
-            >
-              <Link style={{ textDecoration: "none" }}>
+            <ul className="footer-nav">
+              <Link to="/home" style={{ textDecoration: "none" }}>
                 <li>Home</li>
               </Link>
-              <Link style={{ textDecoration: "none" }}>
+              <Link to="/about" style={{ textDecoration: "none" }}>
                 <li>About</li>
               </Link>
-              <Link style={{ textDecoration: "none" }}>
+              <Link to="/electronics" style={{ textDecoration: "none" }}>
                 <li>Electronics</li>
               </Link>
-              <Link style={{ textDecoration: "none" }}>
+              <Link to="/contact" style={{ textDecoration: "none" }}>
                 <li>Contact</li>
               </Link>
             </ul>

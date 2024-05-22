@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { Box, Button, Slide, Snackbar, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import Fade from "@mui/material/Fade";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,19 +11,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { ProductsContext } from "../Products/ProductsContext";
 
-import { Box, Button, Slide, Snackbar, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
-import Fade from "@mui/material/Fade";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 export default function MobilesCarousel() {
-  const {
-    products,
-    setProductCounter,
-    productCounter,
-    cartProducts,
-    setCartProducts,
-  } = useContext(ProductsContext);
+  const { products, setProductCounter, cartProducts, setCartProducts } =
+    useContext(ProductsContext);
 
   const phonesProducts = products.filter((p) => p.category === "phones");
 
