@@ -9,7 +9,7 @@ export default function CtaCart({ total }) {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Grid
@@ -43,7 +43,12 @@ export default function CtaCart({ total }) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <Button variant={"contained"} className="cta-cart-btn">
-              Proceed to checkout
+              <Link
+                to="/checkout"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Proceed to checkout
+              </Link>
             </Button>
             <Button variant={"contained"} className="cta-cart-btn">
               <Link

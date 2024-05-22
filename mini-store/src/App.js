@@ -28,6 +28,7 @@ import Footer from "./Components/HomePage/Footer";
 import Contact from "./Components/Contact/Contact";
 import Electronic from "./Components/Electronics/Electronic";
 import Cart from "./Components/Cart/Cart";
+import Checkout from "./Components/Checkout/Checkout";
 
 const theme = createTheme({
   palette: {
@@ -145,6 +146,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/electronics" element={<Electronic />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
           </Routes>

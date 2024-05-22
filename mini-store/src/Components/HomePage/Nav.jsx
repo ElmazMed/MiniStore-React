@@ -30,7 +30,7 @@ export default function Nav() {
     <Container>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid xs={6} item>
-          <h2 style={{ fontWeight: "500" }}>MiniStore.</h2>
+          <h2 style={{ fontWeight: "500" }}>Elmazgour.</h2>
         </Grid>
 
         <Grid

@@ -1,0 +1,19 @@
+label {
+    color: #3A3A3A;
+    font-size: 15px;
+}
+input {
+    padding: .6rem .3rem .6rem .3rem;
+    border: 1px solid #cccccc;
+    border-radius: .2rem;
+    outline: none;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    width: 85%;
+    font-family: 'jost';
+}
+.checkout-cta{
+    border-radius: 0 !important;
+    padding-inline: 2rem !important;
+    letter-spacing: 1px;
+}

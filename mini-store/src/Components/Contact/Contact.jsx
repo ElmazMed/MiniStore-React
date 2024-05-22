@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  Breadcrumbs,
   Container,
   Grid,
-  Link,
   Stack,
   Typography,
   useMediaQuery,
@@ -14,16 +12,11 @@ import about from "../../Images/about.png";
 import Subscription from "../HomePage/Subscription";
 import ShopInsta from "../HomePage/ShopInsta";
 
-function handleClick(event) {
-  //   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
-
 export default function Contact() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Stack
@@ -43,33 +36,6 @@ export default function Contact() {
           >
             Contact us
           </Typography>
-
-          <div
-            role="presentation"
-            onClick={handleClick}
-            style={{ marginTop: "1.5rem" }}
-          >
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link underline="hover" color="inherit" href="/">
-                Home
-              </Link>
-              <Link
-                underline="hover"
-                color="inherit"
-                href="/material-ui/getting-started/installation/"
-              >
-                Core
-              </Link>
-              <Link
-                underline="hover"
-                color="text.primary"
-                href="/material-ui/react-breadcrumbs/"
-                aria-current="page"
-              >
-                Breadcrumbs
-              </Link>
-            </Breadcrumbs>
-          </div>
         </Container>
       </Stack>
       <Container>
@@ -92,24 +58,13 @@ export default function Contact() {
             flexDirection={"column"}
             alignItems={"center"}
           >
-            {isMd && (
-              <Typography
-                variant="h5"
-                textTransform={"uppercase"}
-                letterSpacing={"2px"}
-              >
-                Our stores
-              </Typography>
-            )}
-            {isSm && (
-              <Typography
-                variant="h6"
-                textTransform={"uppercase"}
-                letterSpacing={"2px"}
-              >
-                our stores
-              </Typography>
-            )}
+            <Typography
+              variant={isSm ? "h6" : "h5"}
+              textTransform={"uppercase"}
+              letterSpacing={"2px"}
+            >
+              ur stores
+            </Typography>
             <Typography
               variant="subtitle2"
               mb={3}

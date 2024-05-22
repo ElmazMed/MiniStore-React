@@ -26,7 +26,7 @@ export default function Footer() {
         <Grid container mt={6} mb={10}>
           <Grid xs={6} item md={3} mb={4}>
             <Typography variant={isSm ? "h5" : "h4"} fontWeight={"500"} mb={2}>
-              MiniStore.
+              Elmazgour.
             </Typography>
             <Typography variant="subtitle2" fontWeight={"300"} mb={2}>
               Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit.
