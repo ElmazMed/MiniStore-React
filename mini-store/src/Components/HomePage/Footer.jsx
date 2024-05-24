@@ -19,7 +19,7 @@ export default function Footer() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <Container>

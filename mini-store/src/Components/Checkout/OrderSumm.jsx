@@ -10,9 +10,7 @@ export default function OrderSumm() {
 
   const cartItems = cartProducts.length;
   const subtotal = [0];
-  cartProducts.map((p) => {
-    subtotal.push(p.quantity * p.price);
-  });
+  cartProducts.map((p) => subtotal.push(p.quantity * p.price));
   const total = subtotal.reduce((acc, curr) => acc + curr);
   return (
     <>

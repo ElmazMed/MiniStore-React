@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Button,
   Container,
@@ -13,10 +13,7 @@ import { useTheme } from "@emotion/react";
 import thankyou from "../../Images/thankyou.svg";
 import person from "../../Images/person.png";
 
-import { ProductsContext } from "../HomePage/Products/ProductsContext";
-
 export default function ThankPage() {
-  const { cartProducts } = useContext(ProductsContext);
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   // const isXs = useMediaQuery(theme.breakpoints.down("xs"));

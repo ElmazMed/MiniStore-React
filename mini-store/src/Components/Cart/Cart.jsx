@@ -30,7 +30,7 @@ export default function Cart() {
 
   //REMOVE THE ITEM FORM THE CART
   const handleRemoveBtn = (id) => {
-    const removeCartProduct = cartProducts.filter((p) => p.id != id);
+    const removeCartProduct = cartProducts.filter((p) => p.id !== id);
     setCartProducts(removeCartProduct);
     setProductCounter(cartProducts.length - 1);
   };
@@ -47,17 +47,15 @@ export default function Cart() {
 
   // INCREASE THE QUANTITY OF THE PRODUCT IN THE CART
   const increaseQuantity = (id) => {
-    const updatedCartQuantity = cartProducts.map((p) => {
-      return p.id === id ? { ...p, quantity: p.quantity + 1 } : p;
-    });
+    const updatedCartQuantity = cartProducts.map((p) =>
+      p.id === id ? { ...p, quantity: p.quantity + 1 } : p
+    );
     setCartProducts(updatedCartQuantity);
   };
 
   //COUNTING THE TOTAL OF ALL THE PRODUCTS IN THE CART WITH THEIR QUANTITY
   const subtotal = [0];
-  cartProducts.map((p) => {
-    subtotal.push(p.quantity * p.price);
-  });
+  cartProducts.map((p) => subtotal.push(p.quantity * p.price));
   const total = subtotal.reduce((acc, curr) => acc + curr);
 
   return (

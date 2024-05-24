@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 
 import { Box, Button, Slide, Snackbar, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import Fade from "@mui/material/Fade";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import Slider from "react-slick";
@@ -12,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ProductsContext } from "../Products/ProductsContext";
 
 export default function MobilesCarousel() {
-  const { products, setProductCounter, cartProducts, setCartProducts } =
+  const { products, handleClose, state, addToCartHandler, settings } =
     useContext(ProductsContext);
 
   const phonesProducts = products.filter((p) => p.category === "phones");
@@ -20,56 +19,6 @@ export default function MobilesCarousel() {
   function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
   }
-
-  // SNACKBAR //
-  const handleClose = () => {
-    setState({
-      ...state,
-      open: false,
-    });
-  };
-  const [state, setState] = useState({
-    open: false,
-    Transition: Fade,
-  });
-  //===== SNACKBAR =====//
-
-  // CAROUSEL SETTINGS //
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  // ==== CAROUSEL SETTINS ===== //
 
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -80,35 +29,9 @@ export default function MobilesCarousel() {
     setHoveredProduct(null);
   };
 
-  const handleAddToCart =
-    (Transition, image, id, name, price, quantity) => () => {
-      let addToCart = true;
-
-      cartProducts.map((p) => {
-        if (p.id === id) {
-          addToCart = false;
-          alert("Product is already in the cart");
-        }
-      });
-
-      if (addToCart) {
-        setCartProducts([
-          ...cartProducts,
-          {
-            id: id,
-            image: image,
-            name: name,
-            price: price,
-            quantity: quantity,
-          },
-        ]);
-        setProductCounter(cartProducts.length + 1);
-        setState({
-          open: true,
-          Transition,
-        });
-      }
-    };
+  const handleAddToCart = (Transition, p) => () => {
+    addToCartHandler(Transition, p);
+  };
 
   return (
     <>
@@ -119,7 +42,7 @@ export default function MobilesCarousel() {
         message="Added To Cart Successfully!"
         style={{ letterSpacing: "2px" }}
         key={state.Transition.name}
-        autoHideDuration={2000}
+        autoHideDuration={1000}
       />
 
       <div className="slider-container">
@@ -155,14 +78,7 @@ export default function MobilesCarousel() {
                         transform: "translate(-50%, -50%)",
                         width: "65%",
                       }}
-                      onClick={handleAddToCart(
-                        SlideTransition,
-                        p.image,
-                        p.id,
-                        p.name,
-                        p.price,
-                        p.quantity
-                      )}
+                      onClick={handleAddToCart(SlideTransition, p)}
                       endIcon={<ShoppingCartIcon />}
                     >
                       Add to cart
