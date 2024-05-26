@@ -9,25 +9,24 @@ import {
 } from "@mui/material";
 import { ProductsContext } from "../HomePage/Products/ProductsContext";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { submitForm } from "../../features/addToCart/AddToCartSlice";
 
 export default function CheckoutForm() {
-  const { cartProducts, setCartProducts, setProductCounter } =
-    useContext(ProductsContext);
+  const product = useSelector((state) => state.addCart.products);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // ADDING STATES FOR THE INPUTS TO CHANGE AND READ THE VALUE
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    setCartProducts([]);
-    setProductCounter(0);
-    navigate("/thank-you");
-  };
   return (
     <>
       <form
         style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={handleSubmit}
+        onSubmit={() => {
+          navigate("/thank-you");
+          dispatch(submitForm());
+        }}
       >
         <label htmlFor="">Last name *</label>
         <input className="checkout-info" type="text" required />
@@ -62,7 +61,7 @@ export default function CheckoutForm() {
           </RadioGroup>
         </FormControl>
         <Button
-          disabled={cartProducts.length === 0 ? true : false}
+          disabled={product.length === 0 ? true : false}
           type="submit"
           variant="contained"
           className="checkout-cta"

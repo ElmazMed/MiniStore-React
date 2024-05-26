@@ -29,7 +29,7 @@ export default function WatchesCarousel() {
     setHoveredProduct(null);
   };
   const handleAddToCart = (Transition, p) => () => {
-    addToCartHandler(Transition, p);
+    addToCartHandler(p);
   };
 
   return (

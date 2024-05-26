@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Grid, Typography, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import "../../App.css";
 import { useTheme } from "@emotion/react";
 
-import { ProductsContext } from "../HomePage/Products/ProductsContext";
+import { useSelector } from "react-redux";
 
 export default function CtaCart({ total }) {
-  const { cartProducts } = useContext(ProductsContext);
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
+
+  const products = useSelector((state) => state.addCart.products);
   return (
     <>
       <Grid
@@ -46,12 +45,12 @@ export default function CtaCart({ total }) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <Button
-              disabled={cartProducts.length === 0 ? true : false}
+              disabled={products.length === 0 ? true : false}
               variant={"contained"}
               className="cta-cart-btn"
             >
               <Link
-                to={cartProducts.length === 0 ? "/cart" : "/checkout"}
+                to={products.length === 0 ? "/cart" : "/checkout"}
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Proceed to checkout

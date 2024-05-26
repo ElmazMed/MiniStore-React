@@ -1,16 +1,16 @@
 import { Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { ProductsContext } from "../HomePage/Products/ProductsContext";
+import { useSelector } from "react-redux";
 
 export default function OrderSumm() {
-  const { cartProducts } = useContext(ProductsContext);
+  const product = useSelector((state) => state.addCart.products);
 
-  const cartItems = cartProducts.length;
+  const cartItems = product.length;
   const subtotal = [0];
-  cartProducts.map((p) => subtotal.push(p.quantity * p.price));
+  product.map((p) => subtotal.push(p.quantity * p.price));
   const total = subtotal.reduce((acc, curr) => acc + curr);
   return (
     <>

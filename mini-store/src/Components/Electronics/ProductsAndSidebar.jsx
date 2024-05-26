@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import {
   Button,
   Grid,
@@ -7,28 +6,20 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import { ProductsContext } from "../HomePage/Products/ProductsContext";
-
 import SideBar from "./SideBar";
 
 export default function ProductsAndSidebar() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
 
-  const { products, setProductCounter, cartProducts, setCartProducts } =
-    useContext(ProductsContext);
+  const { products, addToCartHandler } = useContext(ProductsContext);
   const [filtredProducts, setFiltredProducts] = useState(products);
 
   //PAGINATION//
   const [currentPage, setCurrentPage] = useState(1);
-
   const productsPerPage = isSm ? 4 : 9;
-
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
   const currentProducts = filtredProducts.slice(firstProduct, lastProduct);
@@ -36,29 +27,8 @@ export default function ProductsAndSidebar() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //======= PAGINATION ========//
 
-  const handleAddToCart = (id, image, name, price, quantity) => {
-    let addToCart = true;
-
-    cartProducts.map((p) => {
-      if (p.id === id) {
-        addToCart = false;
-        alert("Product is already in the cart");
-      }
-    });
-
-    if (addToCart) {
-      setCartProducts([
-        ...cartProducts,
-        {
-          id: id,
-          image: image,
-          name: name,
-          price: price,
-          quantity: quantity,
-        },
-      ]);
-      setProductCounter(cartProducts.length + 1);
-    }
+  const handleAddToCart = (p) => () => {
+    addToCartHandler(p);
   };
 
   const handleAllBtn = () => {
@@ -83,6 +53,7 @@ export default function ProductsAndSidebar() {
     });
     setFiltredProducts(filterBtn);
   };
+
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
   const handleMouseOver = (id) => {
@@ -103,7 +74,6 @@ export default function ProductsAndSidebar() {
         <Grid xs={12} md={8} item>
           <div>
             <Grid container>
-              {/* The First slide */}
               {currentProducts.map((p) => {
                 return (
                   <Grid
@@ -114,6 +84,7 @@ export default function ProductsAndSidebar() {
                     onMouseOut={handleMouseOut}
                     xs={6}
                     md={4}
+                    item
                   >
                     <Grid
                       width={isSm ? "85%" : "75%"}
@@ -139,15 +110,7 @@ export default function ProductsAndSidebar() {
                           width: "80%",
                           paddingInline: isSm ? "0" : "1rem",
                         }}
-                        onClick={() => {
-                          handleAddToCart(
-                            p.id,
-                            p.image,
-                            p.name,
-                            p.price,
-                            p.quantity
-                          );
-                        }}
+                        onClick={handleAddToCart(p)}
                         endIcon={<ShoppingCartIcon />}
                       >
                         Add to cart
@@ -182,7 +145,6 @@ export default function ProductsAndSidebar() {
                 );
               })}
             </Grid>
-            {/* Pagination */}
             <div style={{ textAlign: "center", marginTop: "20px" }}>
               {[
                 ...Array(Math.ceil(products.length / productsPerPage)).keys(),

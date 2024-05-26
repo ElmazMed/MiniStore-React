@@ -22,11 +22,14 @@ import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
 import ThankPage from "./Components/ThankYou/ThankPage";
 
+import { useDispatch } from "react-redux";
+
 import { products } from "./Products";
 
 //CAROUSEL SETTINGS IMPORTED TO BE USED
 //FOR ALL COMPONENTS THAT WILL NEED IT
 import { settings } from "./CarouselSett";
+import { addCart } from "./features/addToCart/AddToCartSlice";
 
 const theme = createTheme({
   palette: {
@@ -39,8 +42,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const [productCounter, setProductCounter] = useState(0);
-  const [cartProducts, setCartProducts] = useState([]);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setState({
@@ -54,32 +56,7 @@ function App() {
   });
 
   const addToCartHandler = (Transition, p) => {
-    let addToCart = true;
-
-    cartProducts.map((product) => {
-      if (product.id === p.id) {
-        addToCart = false;
-        alert("Product already in cart");
-      }
-    });
-
-    if (addToCart) {
-      setCartProducts([
-        ...cartProducts,
-        {
-          image: p.image,
-          id: p.id,
-          name: p.name,
-          price: p.price,
-          quantity: p.quantity,
-        },
-      ]);
-      setProductCounter(cartProducts.length + 1);
-      setState({
-        open: true,
-        Transition,
-      });
-    }
+    dispatch(addCart(Transition, p));
   };
 
   return (
@@ -88,10 +65,6 @@ function App() {
         <ProductsContext.Provider
           value={{
             products,
-            productCounter,
-            setProductCounter,
-            cartProducts,
-            setCartProducts,
             addToCartHandler,
             handleClose,
             state,

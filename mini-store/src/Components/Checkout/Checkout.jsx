@@ -17,8 +17,7 @@ import ShopInsta from "../HomePage/ShopInsta";
 export default function Checkout() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <>
       <Stack

@@ -78,7 +78,7 @@ export default function MobilesCarousel() {
                         transform: "translate(-50%, -50%)",
                         width: "65%",
                       }}
-                      onClick={handleAddToCart(SlideTransition, p)}
+                      onClick={handleAddToCart(p)}
                       endIcon={<ShoppingCartIcon />}
                     >
                       Add to cart

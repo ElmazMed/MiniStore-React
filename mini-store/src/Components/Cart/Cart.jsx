@@ -17,46 +17,42 @@ import SubFooter from "../HomePage/SubFooter";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ProductsContext } from "../HomePage/Products/ProductsContext";
 
+import { useSelector, useDispatch } from "react-redux";
+import { removeProduct } from "../../features/addToCart/AddToCartSlice";
+import { reduceQuantity } from "../../features/addToCart/AddToCartSlice";
+import { increaseQuantity } from "../../features/addToCart/AddToCartSlice";
+
 import "../../App.css";
 import CtaCart from "./CtaCart";
 
 export default function Cart() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  // const isMd = useMediaQuery(theme.breakpoints.up("md"));
-  const { cartProducts, setCartProducts, setProductCounter } =
-    useContext(ProductsContext);
+
+  const products = useSelector((state) => state.addCart.products);
+  const dispatch = useDispatch();
 
   //REMOVE THE ITEM FORM THE CART
-  const handleRemoveBtn = (id) => {
-    const removeCartProduct = cartProducts.filter((p) => p.id !== id);
-    setCartProducts(removeCartProduct);
-    setProductCounter(cartProducts.length - 1);
+  const handleRemoveBtn = (p) => {
+    dispatch(removeProduct(p));
   };
 
   // DECREASE THE QUANTITY OF THE PRODUCT IN THE CART
-  const reduceQuantity = (id) => {
-    const updatedCartQuantity = cartProducts.map((p) => {
-      return p.id === id && p.quantity >= 2
-        ? { ...p, quantity: p.quantity - 1 }
-        : { ...p, quantity: p.quantity };
-    });
-    setCartProducts(updatedCartQuantity);
+  const handleReduceQuantity = (p) => {
+    dispatch(reduceQuantity(p));
   };
 
   // INCREASE THE QUANTITY OF THE PRODUCT IN THE CART
-  const increaseQuantity = (id) => {
-    const updatedCartQuantity = cartProducts.map((p) =>
-      p.id === id ? { ...p, quantity: p.quantity + 1 } : p
-    );
-    setCartProducts(updatedCartQuantity);
+  const handleIncreaseQuantity = (p) => {
+    dispatch(increaseQuantity(p));
   };
 
   //COUNTING THE TOTAL OF ALL THE PRODUCTS IN THE CART WITH THEIR QUANTITY
   const subtotal = [0];
-  cartProducts.map((p) => subtotal.push(p.quantity * p.price));
+  products.map((p) => subtotal.push(p.quantity * p.price));
   const total = subtotal.reduce((acc, curr) => acc + curr);
+
+  console.log("The products are: ", products);
 
   return (
     <>
@@ -85,7 +81,7 @@ export default function Cart() {
           mt={10}
           alignItems={"center"}
         >
-          {cartProducts.map((p) => {
+          {products.map((p) => {
             return (
               <Grid
                 className="cart-product-container"
@@ -129,7 +125,7 @@ export default function Cart() {
                     }}
                   >
                     <Button
-                      onClick={() => reduceQuantity(p.id)}
+                      onClick={() => handleReduceQuantity(p)}
                       style={{
                         boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)",
                         minWidth: "43px",
@@ -145,7 +141,7 @@ export default function Cart() {
                       defaultValue
                     />
                     <Button
-                      onClick={() => increaseQuantity(p.id)}
+                      onClick={() => handleIncreaseQuantity(p)}
                       style={{
                         boxShadow: "0px 0px 15px -3px rgba(0, 0, 0, 0.1)",
                         minWidth: "43px",
@@ -157,7 +153,7 @@ export default function Cart() {
                   <Typography variant="h6" color={"secondary"}>
                     $ {p.price * p.quantity}
                   </Typography>
-                  <Button onClick={() => handleRemoveBtn(p.id)}>
+                  <Button onClick={() => handleRemoveBtn(p)}>
                     <DeleteOutlineIcon />
                   </Button>
                 </Grid>

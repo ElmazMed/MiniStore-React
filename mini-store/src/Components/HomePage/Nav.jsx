@@ -1,21 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
-import { ProductsContext } from "./Products/ProductsContext";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 
 export default function Nav() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
-  const { productCounter } = useContext(ProductsContext);
+
+  const counter = useSelector((state) => state.addCart.cartCounter);
   const [mobileMenu, setMobileMenu] = useState({
     display: "none",
     open: false,
@@ -31,7 +31,9 @@ export default function Nav() {
     <Container>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid xs={6} item>
-          <h2 style={{ fontWeight: "500" }}>Elmazgour.</h2>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <h2 style={{ fontWeight: "500", color: "#272727" }}>Elmazgour.</h2>
+          </Link>
         </Grid>
 
         <Grid
@@ -61,8 +63,8 @@ export default function Nav() {
                 </Link>
               </ul>
               <div style={{ position: "relative" }}>
-                <div className="counter">{productCounter}</div>
                 <Link to="/cart">
+                  <div className="counter">{counter}</div>
                   <ShoppingCartIcon color="primary" />
                 </Link>
               </div>
@@ -78,9 +80,8 @@ export default function Nav() {
               }}
             >
               <div style={{ position: "relative" }}>
-                <div className="counter">{productCounter}</div>
-
                 <Link to="/cart">
+                  <div className="counter">{counter}</div>
                   <ShoppingCartIcon color="primary" />
                 </Link>
               </div>
